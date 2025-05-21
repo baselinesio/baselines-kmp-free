@@ -1,0 +1,21 @@
+package io.baselines.sample.ui
+
+import androidx.compose.runtime.Immutable
+import androidx.navigation.NavHostController
+import io.baselines.sample.ui.navigation.NavGraphEntry
+import io.baselines.sample.ui.navigation.NavRoute
+import io.baselines.ui.viewmodel.UiState
+
+@Immutable
+data class MainUiState(
+    val navState: NavStateUm?,
+    override val eventSink: (MainUiEvent) -> Unit
+) : UiState<MainUiEvent> {
+
+    @Immutable
+    data class NavStateUm(
+        val controller: NavHostController,
+        val navGraph: Set<NavGraphEntry>,
+        val startRoute: NavRoute,
+    )
+}
