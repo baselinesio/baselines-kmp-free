@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.baselines.sample.ui.designsystem.loading.LoadingController
+import io.baselines.sample.ui.designsystem.loading.LoadingStateUm.Indeterminate
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.ui.viewmodel.BaselineViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -32,10 +33,12 @@ class PlaygroundViewModel(
         }
     }
 
-    private fun createSections(): ImmutableList<PlaygroundUiState.SectionUm> {
-        return persistentListOf(
-            PlaygroundUiState.SectionUm.Typography,
-            PlaygroundUiState.SectionUm.Spacings,
-        )
+    private suspend fun createSections(): ImmutableList<PlaygroundUiState.SectionUm> {
+        return loadingController.withLoadingIndication(Indeterminate) {
+            return@withLoadingIndication persistentListOf(
+                PlaygroundUiState.SectionUm.Typography,
+                PlaygroundUiState.SectionUm.Spacings,
+            )
+        }
     }
 }
