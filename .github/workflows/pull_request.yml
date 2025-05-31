@@ -58,7 +58,7 @@ jobs:
                     cd app/ios/BaselinesSample
                     
                     xcodebuild \
-                      -scheme BaselinesSample \
+                      -scheme ios.app \
                       -configuration Debug \
                       -sdk iphoneos \
                       -parallelizeTargets \
