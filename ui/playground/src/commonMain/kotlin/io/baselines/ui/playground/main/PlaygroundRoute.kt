@@ -8,6 +8,6 @@ fun PlaygroundRoute(viewModel: PlaygroundViewModel) {
     PlaygroundScreen(
         appVersion = state.appVersion,
         loading = state.loading,
-        sections = state.sections,
+        sectionFactories = state.sectionFactories,
     )
 }

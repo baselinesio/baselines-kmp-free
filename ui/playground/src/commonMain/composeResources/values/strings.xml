@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playground_sectionTitle_typography">Typography</string>
+    <string name="playground_sectionTitle_spacings">Spacings</string>
+</resources>

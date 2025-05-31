@@ -21,9 +21,9 @@ import androidx.compose.ui.Modifier
 import io.baselines.sample.ui.designsystem.components.scrollbar.LazyColumnScrollbar
 import io.baselines.sample.ui.designsystem.loading.LoadingStateUm
 import io.baselines.sample.ui.designsystem.theme.AppTheme
-import io.baselines.ui.playground.main.PlaygroundUiState.SectionUm
-import io.baselines.ui.playground.spacings.SpacingsSection
-import io.baselines.ui.playground.typography.TypographySection
+import io.baselines.ui.playground.SectionFactory
+import io.baselines.ui.playground.spacings.SpacingsSectionFactory
+import io.baselines.ui.playground.typography.TypographySectionFactory
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,7 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PlaygroundScreen(
     appVersion: String,
     loading: LoadingStateUm?,
-    sections: ImmutableList<SectionUm>,
+    sectionFactories: ImmutableList<SectionFactory>,
 ) {
     LazyColumnScrollbar { state ->
         LazyColumn(
@@ -72,12 +72,7 @@ fun PlaygroundScreen(
                 }
             }
 
-            items(sections) { section ->
-                when (section) {
-                    is SectionUm.Spacings -> SpacingsSection(section)
-                    is SectionUm.Typography -> TypographySection(section)
-                }
-            }
+            items(sectionFactories) { sectionFactory -> sectionFactory.Create() }
         }
     }
 }
@@ -90,9 +85,9 @@ private fun PreviewPlaygroundScreen() {
         PlaygroundScreen(
             appVersion = "1.0.1",
             loading = null,
-            sections = persistentListOf(
-                SectionUm.Typography,
-                SectionUm.Spacings,
+            sectionFactories = persistentListOf(
+                SpacingsSectionFactory(),
+                TypographySectionFactory(),
             ),
         )
     }
