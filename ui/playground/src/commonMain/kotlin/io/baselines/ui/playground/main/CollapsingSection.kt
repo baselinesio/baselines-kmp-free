@@ -20,12 +20,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.TextStyle
 import io.baselines.sample.ui.designsystem.theme.AppTheme
-import io.baselines.ui.playground.main.PlaygroundUiState.SectionUm
-
 
 @Composable
 fun CollapsingSection(
-    section: SectionUm,
+    title: String,
     modifier: Modifier = Modifier,
     titleStyle: TextStyle = AppTheme.typography.titleLarge,
     collapsedContent: @Composable (PaddingValues) -> Unit = { },
@@ -49,7 +47,7 @@ fun CollapsingSection(
         ) {
             Text(
                 modifier = Modifier.weight(1F),
-                text = section.title,
+                text = title,
                 style = titleStyle,
                 color = AppTheme.colorScheme.onSurface
             )

@@ -17,16 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.ui.playground.main.CollapsingSection
-import io.baselines.ui.playground.main.PlaygroundUiState.SectionUm
 
 @Composable
 fun SpacingsSection(
-    section: SectionUm.Spacings,
+    title: String,
     modifier: Modifier = Modifier,
 ) {
     CollapsingSection(
         modifier = modifier,
-        section = section,
+        title = title,
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding),

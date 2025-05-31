@@ -1,6 +1,3 @@
 package io.baselines.toolkit.di
 
-import me.tatarka.inject.annotations.Scope
-
-@Scope
-annotation class UiScope
+abstract class UiScope private constructor()

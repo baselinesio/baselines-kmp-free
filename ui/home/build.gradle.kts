@@ -12,9 +12,6 @@ android {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.inject.anvil.runtime)
-            implementation(libs.kotlin.inject.anvil.runtimeOptional)
-
             implementation(projects.toolkit.logger)
             implementation(projects.toolkit.coroutines)
             implementation(projects.ui.designSystem)
