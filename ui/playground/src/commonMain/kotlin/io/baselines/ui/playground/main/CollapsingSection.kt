@@ -25,7 +25,7 @@ import io.baselines.sample.ui.designsystem.theme.AppTheme
 fun CollapsingSection(
     title: String,
     modifier: Modifier = Modifier,
-    titleStyle: TextStyle = AppTheme.typography.titleLarge,
+    titleStyle: TextStyle = AppTheme.typography.titleMedium,
     collapsedContent: @Composable (PaddingValues) -> Unit = { },
     expandedContent: @Composable (PaddingValues) -> Unit,
 ) {

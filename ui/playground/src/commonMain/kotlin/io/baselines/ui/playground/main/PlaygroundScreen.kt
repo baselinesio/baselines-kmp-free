@@ -55,7 +55,7 @@ fun PlaygroundScreen(
                                 .weight(1F)
                                 .padding(AppTheme.spacings.layoutMedium),
                             text = "Playground",
-                            style = AppTheme.typography.headlineLarge,
+                            style = AppTheme.typography.headlineMedium,
                         )
                         Text(
                             modifier = Modifier
