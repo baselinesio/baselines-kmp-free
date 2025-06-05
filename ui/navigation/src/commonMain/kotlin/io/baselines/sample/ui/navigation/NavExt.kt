@@ -20,7 +20,5 @@ package io.baselines.sample.ui.navigation
  */
 fun clearTopNavOptions(inclusive: Boolean = true) = RouteNavOptionsBuilder { graph ->
     launchSingleTop = true
-    popUpTo(requireNotNull(graph.startDestinationRoute)) {
-        this.inclusive = inclusive
-    }
+    popUpTo(0) { this.inclusive = inclusive }
 }
