@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,11 +22,13 @@ import io.baselines.ui.playground.main.CollapsingSection
 @Composable
 fun SpacingsSection(
     title: String,
+    expandedState: MutableState<Boolean>,
     modifier: Modifier = Modifier,
 ) {
     CollapsingSection(
         modifier = modifier,
         title = title,
+        expandedState = expandedState,
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding),

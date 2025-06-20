@@ -1,7 +1,6 @@
 package io.baselines.ui.playground.main
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,9 +27,10 @@ fun CollapsingSection(
     modifier: Modifier = Modifier,
     titleStyle: TextStyle = AppTheme.typography.titleMedium,
     collapsedContent: @Composable (PaddingValues) -> Unit = { },
+    expandedState: MutableState<Boolean> = remember { mutableStateOf(false) },
     expandedContent: @Composable (PaddingValues) -> Unit,
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by expandedState
     Card(
         modifier = Modifier
             .padding(horizontal = AppTheme.spacings.layoutMedium)
@@ -51,14 +52,11 @@ fun CollapsingSection(
                 style = titleStyle,
                 color = AppTheme.colorScheme.onSurface
             )
-            val rotation: Float by animateFloatAsState(
-                targetValue = if (expanded) 180F else 0F,
-                label = "during_sleep_toggle"
-            )
+            val rotation = if (expanded) 180F else 0F
             Text(
                 modifier = Modifier
                     .rotate(rotation),
-                text = "V",
+                text = "⬇\uFE0F",
             )
         }
         val contentPaddings = PaddingValues(

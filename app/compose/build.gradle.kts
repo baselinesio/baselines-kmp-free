@@ -41,6 +41,8 @@ kotlin {
             implementation(projects.ui.navigation)
             implementation(projects.ui.playground)
             implementation(projects.ui.home)
+
+            implementation(libs.kotlin.immutableCollections)
         }
     }
 }

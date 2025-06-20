@@ -72,7 +72,9 @@ fun PlaygroundScreen(
                 }
             }
 
-            items(sectionFactories) { sectionFactory -> sectionFactory.Create() }
+            items(sectionFactories) { sectionFactory ->
+                with(sectionFactory) { Create(expandedState) }
+            }
         }
     }
 }

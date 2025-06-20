@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import io.baselines.sample.ui.designsystem.theme.AppTheme
@@ -13,11 +14,13 @@ import io.baselines.ui.playground.main.CollapsingSection
 @Composable
 fun TypographySection(
     title: String,
+    expandedState: MutableState<Boolean>,
     modifier: Modifier = Modifier,
 ) {
     CollapsingSection(
         modifier = modifier,
         title = title,
+        expandedState = expandedState,
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding),

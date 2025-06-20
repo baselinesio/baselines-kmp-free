@@ -8,12 +8,13 @@ import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.ui.playground.SectionFactory
 import io.baselines.ui.viewmodel.BaselineViewModel
 import kotlinx.collections.immutable.toImmutableList
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class PlaygroundViewModel(
     private val appConfigManager: AppConfigManager,
-    sections: Set<SectionFactory>,
+    @Assisted sections: Set<SectionFactory>,
 ) : BaselineViewModel<PlaygroundUiEvent, PlaygroundUiState>() {
 
     private val sectionFactories = sections.toImmutableList()
