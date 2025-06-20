@@ -5,10 +5,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 /**
  * A state holder that wraps a [MutableStateFlow] and provides a mechanism to properly initialize the states within
@@ -35,15 +35,12 @@ import kotlinx.coroutines.launch
 class MutableState<T>(
     scope: CoroutineScope,
     initialValue: T,
-    factory: suspend () -> T,
+    factory: (suspend () -> T)? = null,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
     private val write: MutableStateFlow<T> = MutableStateFlow(initialValue),
     read: StateFlow<T> = write
-        .onStart {
-            scope.launch(Dispatchers.Default) {
-                write.update { factory.invoke() }
-            }
-        }
+        .onStart { factory?.let { write.update { factory.invoke() } } }
+        .flowOn(Dispatchers.Default)
         .stateIn(scope, started, initialValue),
 ) : StateFlow<T> by read {
 

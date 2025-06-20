@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import io.baselines.sample.ui.navigation.NavGraphEntry
 import io.baselines.sample.ui.navigation.NavRoute
 import io.baselines.ui.viewmodel.UiState
+import kotlinx.collections.immutable.ImmutableSet
 
 @Immutable
 data class MainUiState(
@@ -15,7 +16,7 @@ data class MainUiState(
     @Immutable
     data class NavStateUm(
         val controller: NavHostController,
-        val navGraph: Set<NavGraphEntry>,
+        val navGraph: ImmutableSet<NavGraphEntry>,
         val startRoute: NavRoute,
     )
 }

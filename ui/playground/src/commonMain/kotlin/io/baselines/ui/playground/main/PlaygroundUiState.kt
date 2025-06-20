@@ -11,5 +11,6 @@ data class PlaygroundUiState(
     val appVersion: String,
     val loading: LoadingStateUm?,
     val sectionFactories: ImmutableList<SectionFactory>,
+    val searchInput: String,
     override val eventSink: (PlaygroundUiEvent) -> Unit,
 ) : UiState<PlaygroundUiEvent>

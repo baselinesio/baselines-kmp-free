@@ -11,6 +11,7 @@ import io.baselines.sample.ui.navigation.NavGraphEntry
 import io.baselines.sample.ui.navigation.NavRoute
 import io.baselines.toolkit.initializer.CompositeInitializer
 import io.baselines.ui.viewmodel.BaselineViewModel
+import kotlinx.collections.immutable.toImmutableSet
 import me.tatarka.inject.annotations.Inject
 
 @Inject
@@ -43,7 +44,7 @@ class MainViewModel(
                 if (it.isSuccess) {
                     MainUiState.NavStateUm(
                         controller = navController,
-                        navGraph = navGraph,
+                        navGraph = navGraph.toImmutableSet(),
                         startRoute = NavRoute.Default,
                     )
                 } else {

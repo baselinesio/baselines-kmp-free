@@ -26,9 +26,3 @@ kotlin {
         }
     }
 }
-
-compose.resources {
-    publicResClass = false
-    generateResClass = always
-    packageOfResClass = "io.baselines.ui.playground"
-}

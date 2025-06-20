@@ -82,7 +82,7 @@ abstract class BaselineViewModel<E : UiEvent, S : UiState<E>> : ViewModel() {
     protected fun <T> mutableState(
         initialValue: T,
         started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
-        factory: suspend () -> T
+        factory: (suspend () -> T)? = null,
     ): MutableState<T> {
         return MutableState(
             scope = viewModelScope,

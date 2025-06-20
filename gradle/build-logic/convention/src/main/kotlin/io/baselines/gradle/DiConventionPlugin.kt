@@ -8,20 +8,41 @@ class DiConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("com.google.devtools.ksp")
-        target.addKspDependencyForAllTargets(libs.findLibrary("kotlin.inject.anvil.compiler").get())
+
+        if (pluginManager.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            addKspDependencies(multiplatform = true)
+            addDiDependencies("commonMainImplementation")
+        } else {
+            addKspDependencies(multiplatform = false)
+            addDiDependencies("implementation")
+        }
+    }
+
+    private fun Project.addDiDependencies(configuration: String) {
         dependencies {
             add(
-                "commonMainImplementation",
+                configuration,
                 libs.findLibrary("kotlin.inject.anvil.runtime").get()
             )
             add(
-                "commonMainImplementation",
+                configuration,
                 libs.findLibrary("kotlin.inject.anvil.runtimeOptional").get()
             )
             add(
-                "commonMainImplementation",
+                configuration,
                 project(":toolkit:di")
             )
+        }
+    }
+
+    private fun Project.addKspDependencies(multiplatform: Boolean) {
+        val anvilKsp = libs.findLibrary("kotlin.inject.anvil.compiler").get()
+        if (multiplatform) {
+            addKspDependencyForAllTargets(anvilKsp)
+        } else {
+            dependencies {
+                add("ksp", anvilKsp)
+            }
         }
     }
 }
