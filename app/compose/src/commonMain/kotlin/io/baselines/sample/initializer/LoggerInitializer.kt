@@ -1,5 +1,6 @@
 package io.baselines.sample.initializer
 
+import io.baselines.toolkit.config.AppConfig.Platform
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.toolkit.initializer.Initializer
 import io.baselines.toolkit.logger.KermitWriter
@@ -13,7 +14,11 @@ class LoggerInitializer(
 ) : Initializer {
 
     override suspend fun init() {
-        val debug = appConfigManager.appConfig.first().debug
-        if (debug) Logger.writer = KermitWriter()
+        val config = appConfigManager.appConfig.first()
+        if (config.debug) {
+            Logger.writer = KermitWriter(
+                printStacktrace = config.platform != Platform.IOS
+            )
+        }
     }
 }
