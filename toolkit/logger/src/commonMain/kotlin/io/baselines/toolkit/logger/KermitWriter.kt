@@ -11,7 +11,9 @@ import co.touchlab.kermit.platformLogWriter
  *
  * Initialized with platform-specific behavior via [platformLogWriter] and [tagFactory].
  */
-class KermitWriter : LogWriter {
+class KermitWriter(
+    private val printStacktrace: Boolean,
+) : LogWriter {
 
     init {
         co.touchlab.kermit.Logger.setLogWriters(platformLogWriter(NoTagFormatter))
@@ -28,7 +30,13 @@ class KermitWriter : LogWriter {
     override fun e(
         throwable: Throwable?,
         message: () -> String
-    ) = co.touchlab.kermit.Logger.e(throwable = throwable, message = message)
+    ) {
+        co.touchlab.kermit.Logger.e(
+            createTag(),
+            message = message,
+            throwable = if (printStacktrace) throwable else null
+        )
+    }
 
     private fun createTag(): String = tagFactory().createTag() ?: EMPTY_TAG
 

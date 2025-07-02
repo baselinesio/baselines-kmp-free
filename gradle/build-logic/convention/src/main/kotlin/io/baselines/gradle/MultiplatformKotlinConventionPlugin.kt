@@ -39,6 +39,7 @@ class MultiplatformKotlinConventionPlugin : Plugin<Project> {
                 // Various opt-ins
                 languageSettings.optIn("kotlin.RequiresOptIn")
                 languageSettings.optIn("kotlin.experimental.ExperimentalNativeApi")
+                languageSettings.optIn("kotlin.time.ExperimentalTime")
                 compilerOptions {
                     freeCompilerArgs.addAll(
                         "-Xexpect-actual-classes",
