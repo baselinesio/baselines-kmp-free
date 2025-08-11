@@ -11,25 +11,26 @@ import io.baselines.ui.viewmodel.viewModel
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
-typealias ComposeApp = @Composable () -> Unit
-
 @Inject
 @SingleIn(UiScope::class)
-@Composable
-fun ComposeApp(viewModelFactory: () -> MainViewModel) {
-    AppTheme {
-        val viewModel = viewModel(viewModelFactory)
-        val state = viewModel.state()
-        AnimatedContent(
-            modifier = Modifier.fillMaxSize(),
-            targetState = state.navState,
-        ) { targetNavState ->
-            if (targetNavState != null) {
-                AppNavHost(
-                    navController = targetNavState.controller,
-                    navGraph = targetNavState.navGraph,
-                    startRoute = targetNavState.startRoute,
-                )
+class ComposeApp(private val viewModelFactory: () -> MainViewModel) {
+
+    @Composable
+    operator fun invoke() {
+        AppTheme {
+            val viewModel = viewModel(viewModelFactory)
+            val state = viewModel.state()
+            AnimatedContent(
+                modifier = Modifier.fillMaxSize(),
+                targetState = state.navState,
+            ) { targetNavState ->
+                if (targetNavState != null) {
+                    AppNavHost(
+                        navController = targetNavState.controller,
+                        navGraph = targetNavState.navGraph,
+                        startRoute = targetNavState.startRoute,
+                    )
+                }
             }
         }
     }

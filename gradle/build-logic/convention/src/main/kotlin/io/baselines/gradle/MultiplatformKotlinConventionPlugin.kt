@@ -2,7 +2,6 @@ package io.baselines.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
@@ -83,8 +82,9 @@ private fun Project.addKspDependencyForAllTargets(
                 target.platformType != KotlinPlatformType.common
             }
             .forEach { target ->
+                val capitalizedTarget = target.targetName.replaceFirstChar { it.uppercaseChar() }
                 add(
-                    "ksp${target.targetName.capitalized()}$configurationNameSuffix",
+                    "ksp$capitalizedTarget$configurationNameSuffix",
                     dependencyNotation,
                 )
             }
