@@ -5,6 +5,7 @@
 .run/
 build/
 captures/
+!.idea/icon.svg
 *.iml
 local.properties
 .DS_Store
