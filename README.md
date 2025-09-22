@@ -1,8 +1,8 @@
 ## 📖 Documentation
 
-For detailed guides, architecture diagrams, and how-to articles, visit our public Knowledge Base:
+For detailed guides, architecture diagrams, and how-to articles, visit docs:
 
-➡️  https://www.baselines.io/knowledgebase
+➡️  [baselines-kmp/docs](./docs)
 
 ---
 
