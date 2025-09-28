@@ -19,14 +19,22 @@ common pitfalls.
 
 ## Prerequisites
 
-| Tool / SDK         | Notes                                                        |
-|--------------------|--------------------------------------------------------------|
-| **macOS**          | Required for iOS builds. Linux/Win OK for Android‑only.      |
-| **Python**         | Needed to run the generator script. Run `python3 --version`. |
-| **Git**            | Clone/keep your project under version control.               |
-| **Android Studio** | Install Android SDK 35.                                      |
-| **Xcode**          | iOS 15.3 SDK.                                                |
-| Command‑line tools | Pre‑installed on macOS.                                      |
+| Tool / SDK         | Minimum Version          | Notes                                                        |
+|--------------------|--------------------------|--------------------------------------------------------------|
+| **macOS**          | 13 Ventura               | Required for iOS builds. Linux/Win OK for Android‑only.      |
+| **Python**         | 3.9+                     | Needed to run the generator script. Run `python3 --version`. |
+| **Git**            | any recent               | Clone/keep your project under version control.               |
+| **Android Studio** | latest                   | Install Android SDK 35.                                      |
+| **Xcode**          | latest                   | iOS 15.3 SDK.                                                |
+| Command‑line tools | `git`, `python3`, `bash` | Pre‑installed on macOS.                                      |
+
+<p align="center">
+    <img src="../images/android-studio-about.png" alt="Android Studio About" width="856">
+</p>
+
+<p align="center">
+    <img src="../images/xcode-about.png" alt="XCode About" width="856">
+</p>
 
 ## **Quick Start (TL;DR)**
 
@@ -47,7 +55,7 @@ open ./MyApp/app/ios/MyApp/MyApp.xcodeproj
 Open **Terminal.app** (or iTerm) and `cd` into the folder that will host the new repo (e.g. `~/Projects`).
 
 <p align="center">
-    <img src="images/terminal-project-dir.png" alt="Project Dir" width="856">
+    <img src="../images/terminal-project-dir.png" alt="Project Dir" width="856">
 </p>
 
 ### 2 Launch the generator script
@@ -68,7 +76,7 @@ The script will prompt for:
 | **Organization** | Shown in copyright, Apple signing, etc.               | `baselines`         |
 
 <p align="center">
-    <img src="images/terminal-project-generated.png" alt="Generated Project" width="856">
+    <img src="../images/terminal-project-generated.png" alt="Generated Project" width="856">
 </p>
 
 ### 3 Open & run the Android project
@@ -85,7 +93,7 @@ on the `app.android` configuration.
 The **Playground** screen should appear.
 
 <p align="center">
-    <img src="images/android-running-playground.png" alt="Android Playground" width="428">
+    <img src="../images/android-running-playground.png" alt="Android Playground" width="428">
 </p>
 
 ### 4 Open & run the iOS project
@@ -101,7 +109,7 @@ Wait until project is ready to start, then click ▶︎ **Run**.
 The **Playground** screen should appear.
 
 <p align="center">
-    <img src="images/ios-running-playground.png" alt="iOS Playground" width="428">
+    <img src="../images/ios-running-playground.png" alt="iOS Playground" width="428">
 </p>
 
 If Xcode complains about signing:

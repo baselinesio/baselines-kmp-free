@@ -59,7 +59,7 @@ It consists of the following functional layers:
 - **toolkit**: Internal libraries, utility wrappers, logger, DI qualifiers, coroutines, etc.
 
 <p align="center">
-    <img src="images/project-structure.png" alt="Project Structure" width="428">
+    <img src="../images/project-structure.png" alt="Project Structure" width="428">
 </p>
 
 ## **Dependencies & Technologies**
