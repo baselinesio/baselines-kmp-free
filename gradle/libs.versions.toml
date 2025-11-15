@@ -1,0 +1,73 @@
+[versions]
+gradle-cacheFixPlugin = "3.0.3"
+android-gradlePlugin = "8.13.1"
+android-desugarjdklibs = "2.1.5"
+kotlin = "2.2.21"
+kotlin-serialization = "1.9.0"
+kotlin-inject = "0.7.2"
+kotlin-inject-anvil = "0.1.6"
+kotlin-coroutines = "1.10.2"
+kotlin-time = "0.7.1"
+kotlin-immutableCollections = "0.4.0"
+kotlin-test = "2.1.10"
+kotlin-compose-material3 = "1.10.0-alpha04"
+kotlin-compose = "1.10.0-beta01"
+androidx-compose = "1.10.0-beta02"
+androidx-compose-activity = "1.11.0"
+androidx-compose-lifecycle = "2.9.6"
+androidx-compose-navigation = "2.9.1"
+androidx-splash = "1.2.0"
+logging-kermit = "2.0.8"
+google-ksp = "2.3.2"
+
+[libraries]
+kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
+kotlin-inject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
+kotlin-inject-anvil-runtime = { module = "software.amazon.lastmile.kotlin.inject.anvil:runtime", version.ref = "kotlin-inject-anvil" }
+kotlin-inject-anvil-runtimeOptional = { module = "software.amazon.lastmile.kotlin.inject.anvil:runtime-optional", version.ref = "kotlin-inject-anvil" }
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
+kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-time" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-test" }
+kotlin-immutableCollections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutableCollections" }
+kotlin-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "kotlin-compose-material3" }
+kotlin-compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "kotlin-compose" }
+kotlin-compose-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "kotlin-compose" }
+androidx-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "androidx-compose" }
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-compose-activity" }
+androidx-compose-viewModel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-compose-lifecycle" }
+androidx-compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-compose-lifecycle" }
+androidx-compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
+androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
+logging-kermit = { module = "co.touchlab:kermit", version.ref = "logging-kermit" }
+
+# Build logic dependencies
+android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
+kotlin-inject-anvil-compiler = { module = "software.amazon.lastmile.kotlin.inject.anvil:compiler", version.ref = "kotlin-inject-anvil" }
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "android-gradlePlugin" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+composeCompiler-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "kotlin-compose" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradlePlugin" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+gradle-cacheFixPlugin = { id = "org.gradle.android.cache-fix", version.ref = "gradle-cacheFixPlugin" }
+kotlin-compose = { id = "org.jetbrains.compose", version.ref = "kotlin-compose" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
+
+# Local plugins
+baselines-root = { id = "io.baselines.root" }
+baselines-di = { id = "io.baselines.di" }
+baselines-android-application = { id = "io.baselines.android.application" }
+baselines-android-library = { id = "io.baselines.android.library" }
+baselines-android-compose = { id = "io.baselines.android.compose" }
+baselines-multiplatform-android-library = { id = "io.baselines.multiplatform.android.library" }
+baselines-multiplatform-kotlin = { id = "io.baselines.multiplatform.kotlin" }
+baselines-compose = { id = "io.baselines.compose" }
