@@ -1,11 +1,11 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.baselines.sample.ui.designsystem.loading.LoadingController
 import io.baselines.toolkit.config.AppConfigManager
-import io.baselines.ui.playground.SectionFactory
+import io.baselines.ui.playground.sections.PlaygroundSection
 import io.baselines.ui.viewmodel.BaselineViewModel
 import kotlinx.collections.immutable.toImmutableList
 import me.tatarka.inject.annotations.Assisted
@@ -14,7 +14,7 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class PlaygroundViewModel(
     private val appConfigManager: AppConfigManager,
-    @Assisted private val sections: Set<SectionFactory>,
+    @Assisted private val sections: Set<PlaygroundSection>,
 ) : BaselineViewModel<PlaygroundUiEvent, PlaygroundUiState>() {
 
     private val searchInputFlow = mutableState("")
@@ -30,7 +30,7 @@ class PlaygroundViewModel(
         return PlaygroundUiState(
             appVersion = appConfig.info.version,
             loading = loading,
-            sectionFactories = sectionFactories,
+            sections = sectionFactories,
             searchInput = searchInput,
         ) { event ->
             when (event) {

@@ -6,8 +6,9 @@ plugins {
     alias(libs.plugins.baselines.di)
 }
 
+androidLibrary("io.baselines.toolkit.config")
+
 kotlin {
-    androidLibrary("io.baselines.toolkit.config")
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlin.coroutines.core)

@@ -1,4 +1,4 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.components
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.clickable
@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,12 +19,13 @@ import io.baselines.sample.ui.designsystem.theme.AppTheme
 @Composable
 fun CollapsingSection(
     title: String,
+    expanded: Boolean,
+    onExpandedChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     titleStyle: TextStyle = AppTheme.typography.titleMedium,
     collapsedContent: @Composable (PaddingValues) -> Unit = { },
     expandedContent: @Composable (PaddingValues) -> Unit,
 ) {
-    var expanded by rememberSaveable { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = AppTheme.spacings.layoutMedium)
@@ -36,7 +33,7 @@ fun CollapsingSection(
         Row(
             modifier = Modifier
                 .clip(AppTheme.shapes.roundMedium)
-                .clickable(onClick = { expanded = !expanded })
+                .clickable(onClick = { onExpandedChanged(!expanded) })
                 .then(modifier)
                 .padding(AppTheme.spacings.layoutMedium),
             verticalAlignment = Alignment.CenterVertically,

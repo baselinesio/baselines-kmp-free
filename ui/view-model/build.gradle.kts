@@ -6,8 +6,9 @@ plugins {
     alias(libs.plugins.baselines.compose)
 }
 
+androidLibrary("io.baselines.ui.viewmodel")
+
 kotlin {
-    androidLibrary("io.baselines.ui.viewmodel")
     sourceSets {
         commonMain.dependencies {
             api(libs.androidx.compose.viewModel)

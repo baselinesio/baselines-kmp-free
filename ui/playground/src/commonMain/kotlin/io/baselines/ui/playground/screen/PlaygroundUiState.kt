@@ -1,8 +1,8 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.screen
 
 import androidx.compose.runtime.Immutable
 import io.baselines.sample.ui.designsystem.loading.LoadingStateUm
-import io.baselines.ui.playground.SectionFactory
+import io.baselines.ui.playground.sections.PlaygroundSection
 import io.baselines.ui.viewmodel.UiState
 import kotlinx.collections.immutable.ImmutableList
 
@@ -10,7 +10,7 @@ import kotlinx.collections.immutable.ImmutableList
 data class PlaygroundUiState(
     val appVersion: String,
     val loading: LoadingStateUm?,
-    val sectionFactories: ImmutableList<SectionFactory>,
+    val sections: ImmutableList<PlaygroundSection>,
     val searchInput: String,
     override val eventSink: (PlaygroundUiEvent) -> Unit,
 ) : UiState<PlaygroundUiEvent>

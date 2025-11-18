@@ -9,9 +9,9 @@ plugins {
     alias(libs.plugins.baselines.di)
 }
 
-kotlin {
-    androidLibrary("io.baselines.sample.compose")
+androidLibrary("io.baselines.sample.compose")
 
+kotlin {
     targets.withType<KotlinNativeTarget>().configureEach {
         binaries.framework {
             baseName = "BaselinesSampleCompose"

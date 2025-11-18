@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.baselines.multiplatform.kotlin)
 }
 
+androidLibrary("io.baselines.sample.domain")
+
 kotlin {
-    androidLibrary("io.baselines.sample.domain")
     sourceSets {
         commonMain.dependencies {
             implementation(projects.toolkit.coroutines)

@@ -1,8 +1,9 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -27,9 +30,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.baselines.sample.ui.designsystem.components.scrollbar.LazyColumnScrollbar
 import io.baselines.sample.ui.designsystem.loading.LoadingStateUm
 import io.baselines.sample.ui.designsystem.theme.AppTheme
-import io.baselines.ui.playground.SectionFactory
-import io.baselines.ui.playground.spacings.SpacingsSectionFactory
-import io.baselines.ui.playground.typography.TypographySectionFactory
+import io.baselines.ui.playground.components.CollapsingSection
+import io.baselines.ui.playground.sections.PlaygroundSection
+import io.baselines.ui.playground.sections.SpacingsSection
+import io.baselines.ui.playground.sections.TypographySection
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -37,11 +41,12 @@ import kotlinx.collections.immutable.persistentListOf
 fun PlaygroundScreen(
     appVersion: String,
     loading: LoadingStateUm?,
-    sectionFactories: ImmutableList<SectionFactory>,
+    sections: ImmutableList<PlaygroundSection>,
     searchInput: String,
     onSearchInputChanged: (String) -> Unit,
 ) {
     LazyColumnScrollbar { state ->
+        val expandedStateMap = remember { mutableStateMapOf<String, Boolean>() }
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -113,8 +118,16 @@ fun PlaygroundScreen(
                 }
             }
 
-            items(sectionFactories) { sectionFactory ->
-                with(sectionFactory) { Create() }
+            items(items = sections) { item ->
+                CollapsingSection(
+                    title = item.name,
+                    expanded = expandedStateMap[item.name] == true,
+                    onExpandedChanged = { expandedStateMap[item.name] = it }
+                ) { padding ->
+                    Box(Modifier.padding(padding)) {
+                        item.uiFactory.composable()
+                    }
+                }
             }
         }
     }
@@ -128,9 +141,9 @@ private fun PreviewPlaygroundScreen() {
         PlaygroundScreen(
             appVersion = "1.0.1",
             loading = null,
-            sectionFactories = persistentListOf(
-                SpacingsSectionFactory(),
-                TypographySectionFactory(),
+            sections = persistentListOf(
+                SpacingsSection(),
+                TypographySection(),
             ),
             searchInput = "",
             onSearchInputChanged = { /* no-op */ }

@@ -1,4 +1,4 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.screen
 
 import io.baselines.ui.viewmodel.UiEvent
 

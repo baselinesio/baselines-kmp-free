@@ -102,7 +102,7 @@ def fix_package_structure(
     project_dir: Path, old_package_root: str, new_package_root: str
 ):
     source_dirs = [
-        project_dir / "app" / "android" / "src" / "main" / "java",
+        project_dir / "app" / "android" / "src" / "main" / "kotlin",
         project_dir / "app" / "compose" / "src" / "androidMain" / "kotlin",
         project_dir / "app" / "compose" / "src" / "commonMain" / "kotlin",
         project_dir / "app" / "compose" / "src" / "iosMain" / "kotlin",

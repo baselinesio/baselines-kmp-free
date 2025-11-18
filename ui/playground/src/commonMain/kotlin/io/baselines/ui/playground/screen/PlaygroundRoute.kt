@@ -1,4 +1,4 @@
-package io.baselines.ui.playground.main
+package io.baselines.ui.playground.screen
 
 import androidx.compose.runtime.Composable
 
@@ -9,7 +9,7 @@ fun PlaygroundRoute(viewModel: PlaygroundViewModel) {
     PlaygroundScreen(
         appVersion = state.appVersion,
         loading = state.loading,
-        sectionFactories = state.sectionFactories,
+        sections = state.sections,
         searchInput = state.searchInput,
         onSearchInputChanged = { eventSink(PlaygroundUiEvent.Search(it)) }
     )

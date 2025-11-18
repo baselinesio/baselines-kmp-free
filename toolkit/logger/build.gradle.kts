@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.baselines.multiplatform.kotlin)
 }
 
+androidLibrary("io.baselines.toolkit.logger")
+
 kotlin {
-    androidLibrary("io.baselines.toolkit.logger")
     sourceSets {
         commonMain.dependencies {
             implementation(libs.logging.kermit)

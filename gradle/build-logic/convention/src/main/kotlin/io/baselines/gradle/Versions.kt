@@ -5,7 +5,7 @@ object Versions {
     const val COMPILE_SDK = 36
     const val TARGET_SDK = 36
     const val MIN_SDK = 27
-    const val JAVA_VERSION = 17
+    const val JAVA_VERSION = 21
 
     private const val FORM_FACTOR = 1
     private const val VERSION_MAJOR = 0
