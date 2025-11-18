@@ -44,7 +44,11 @@ Use this if your module should compile for both or on of the mobile platforms (A
 ```kotlin
 plugins {
     alias(libs.plugins.baselines.multiplatform.kotlin)
-    // Add to include android target
+    // IMPORTANT: 
+    // Android plugin should be applied, if module also targets Android.
+    // Current Android Gradle Plugin (below version 9.0) has an issue with UI Preview rendering that affects UI modules
+    // only. To workaround the issue without migrating to new AGP version, replace 
+    // `alias(libs.plugins.baselines.multiplatform.android.library)` with `alias(libs.plugins.baselines.android.library)`
     alias(libs.plugins.baselines.multiplatform.android.library)
     // Add to include compose (usually, necessary for the UI modules)
     alias(libs.plugins.baselines.compose)
@@ -54,11 +58,10 @@ plugins {
 2. (Optional) Set android target namespace
 
 ```kotlin
-// If your module targets android, include the namespace
-import io.baselines.gradle.multiplatform.androidLibrary
-kotlin {
-    androidLibrary("com.example.ui.profile")
-}
+// IMPORTANT: make sure to use the correct import. Depending on the applied above plugins, the import will change.
+// If you applied `alias(libs.plugins.baselines.android.library)` -> add `import io.baselines.gradle.android.androidLibrary`
+// If you applied `alias(libs.plugins.baselines.multiplatform.android.library)` -> add `import io.baselines.gradle.multiplatform.androidLibrary`
+androidLibrary("com.example.ui.profile")
 ```
 
 3. Declare dependencies by target
@@ -115,8 +118,9 @@ plugins {
     alias(libs.plugins.baselines.compose)
 }
 
+androidLibrary("com.example.ui.profile")
+
 kotlin {
-    androidLibrary("com.example.ui.profile")
     sourceSets {
         commonMain.dependencies {
             // Common dependencies
@@ -150,9 +154,9 @@ plugins {
 2. Set the namespace
 
 ```kotlin
-android {
-    namespace = "com.example.ui.profile"
-}
+import io.baselines.gradle.multiplatform.androidLibrary
+
+androidLibrary("com.example.ui.profile")
 ```
 
 3. Declare dependencies
@@ -180,14 +184,14 @@ src/main/kotlin/com/example/ui/profile
 ✅ Full Android example
 
 ```kotlin
+import io.baselines.gradle.android.androidLibrary
+
 plugins {
     alias(libs.plugins.baselines.android.library)
     alias(libs.plugins.baselines.compose)
 }
 
-android {
-    namespace = "com.example.ui.profile"
-}
+androidLibrary("com.example.ui.profile")
 
 dependencies {
     // Android-specific dependencies

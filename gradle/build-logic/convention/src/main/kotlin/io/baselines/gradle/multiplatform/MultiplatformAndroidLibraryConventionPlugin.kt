@@ -1,13 +1,13 @@
 package io.baselines.gradle.multiplatform
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-import com.android.build.api.dsl.androidLibrary
 import io.baselines.gradle.Versions
 import io.baselines.gradle.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class MultiplatformAndroidLibraryConventionPlugin : Plugin<Project> {
@@ -33,6 +33,8 @@ fun Project.androidLibrary(
         compileSdk = Versions.COMPILE_SDK
         enableCoreLibraryDesugaring = true
 
+        compilerOptions { jvmTarget.set(JvmTarget.fromTarget(Versions.JAVA_VERSION.toString())) }
+
         block()
     }
 
@@ -46,6 +48,7 @@ fun Project.androidLibrary(
 
 private fun Project.androidLibrary(block: KotlinMultiplatformAndroidLibraryTarget.() -> Unit) {
     extensions.configure<KotlinMultiplatformExtension> {
-        androidLibrary(block)
+        targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java)
+            .configureEach { block() }
     }
 }

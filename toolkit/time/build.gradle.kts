@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.baselines.multiplatform.kotlin)
 }
 
+androidLibrary("io.baselines.toolkit.time")
+
 kotlin {
-    androidLibrary("io.baselines.toolkit.time")
     sourceSets {
         commonMain.dependencies {
             api(libs.kotlin.time)

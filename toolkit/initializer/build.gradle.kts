@@ -6,14 +6,15 @@ plugins {
     alias(libs.plugins.baselines.di)
 }
 
-kotlin {
-    androidLibrary("io.baselines.toolkit.initializer") {
-        withHostTest {
-            isIncludeAndroidResources = true
-            isReturnDefaultValues = true
-            enableCoverage = true
-        }
+androidLibrary("io.baselines.toolkit.initializer") {
+    withHostTest {
+        isIncludeAndroidResources = true
+        isReturnDefaultValues = true
+        enableCoverage = true
     }
+}
+
+kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.toolkit.logger)

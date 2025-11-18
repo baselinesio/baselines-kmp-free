@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.baselines.multiplatform.kotlin)
 }
 
+androidLibrary("io.baselines.toolkit.di")
+
 kotlin {
-    androidLibrary("io.baselines.toolkit.di")
     sourceSets {
         commonMain.dependencies {
             api(libs.kotlin.inject.runtime)

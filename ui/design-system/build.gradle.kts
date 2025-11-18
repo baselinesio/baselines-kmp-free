@@ -1,13 +1,14 @@
-import io.baselines.gradle.multiplatform.androidLibrary
+import io.baselines.gradle.android.androidLibrary
 
 plugins {
-    alias(libs.plugins.baselines.multiplatform.android.library)
+    alias(libs.plugins.baselines.android.library)
     alias(libs.plugins.baselines.multiplatform.kotlin)
     alias(libs.plugins.baselines.compose)
 }
 
+androidLibrary("io.baselines.sample.ui.designsystem")
+
 kotlin {
-    androidLibrary("io.baselines.sample.ui.designsystem")
     sourceSets {
         androidMain.dependencies {
             api(libs.androidx.compose.tooling)

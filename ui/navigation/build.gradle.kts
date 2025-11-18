@@ -8,8 +8,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+androidLibrary("io.baselines.sample.ui.navigation")
+
 kotlin {
-    androidLibrary("io.baselines.sample.ui.navigation")
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlin.serialization)
