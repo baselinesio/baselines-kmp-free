@@ -1,35 +1,40 @@
 package io.baselines.gradle.android
 
-import com.android.build.gradle.AppExtension
-import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import com.android.build.api.dsl.ApplicationExtension
 import io.baselines.gradle.Versions
+import io.baselines.gradle.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) { apply("com.android.application") }
-            configureAndroidCommon()
             configureAndroidApplication()
         }
     }
 
     private fun Project.configureAndroidApplication() {
         android {
-            defaultConfig {
-                versionCode = Versions.VERSION_CODE
-                versionName = Versions.VERSION_NAME
+            compileSdk { version = release(Versions.COMPILE_SDK) }
+            compileOptions { isCoreLibraryDesugaringEnabled = true }
+            java { toolchain { languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION)) } }
+            kotlin {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.fromTarget(Versions.JAVA_VERSION.toString()))
+                }
             }
 
-            applicationVariants.all {
-                outputs.all {
-                    if (this is ApkVariantOutputImpl) {
-                        outputFileName = "app-${buildType.name}-v${versionName}.apk"
-                    }
-                }
+            defaultConfig {
+                minSdk = Versions.MIN_SDK
+                targetSdk = Versions.TARGET_SDK
+                versionCode = Versions.VERSION_CODE
+                versionName = Versions.VERSION_NAME
             }
 
             buildTypes {
@@ -49,9 +54,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
             }
         }
+
+        dependencies { "coreLibraryDesugaring"(libs.findLibrary("android.desugarjdklibs").get()) }
     }
 
-    private fun Project.android(block: AppExtension.() -> Unit) {
-        extensions.configure<AppExtension>(block)
+    private fun Project.android(block: ApplicationExtension.() -> Unit) {
+        extensions.configure<ApplicationExtension>(block)
     }
 }

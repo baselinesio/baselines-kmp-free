@@ -1,6 +1,5 @@
 [versions]
-gradle-cacheFixPlugin = "3.0.3"
-android-gradlePlugin = "8.13.1"
+android-gradlePlugin = "9.0.0-beta01"
 android-desugarjdklibs = "2.1.5"
 kotlin = "2.2.21"
 kotlin-serialization = "1.9.0"
@@ -55,7 +54,6 @@ compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin",
 android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradlePlugin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-gradle-cacheFixPlugin = { id = "org.gradle.android.cache-fix", version.ref = "gradle-cacheFixPlugin" }
 kotlin-compose = { id = "org.jetbrains.compose", version.ref = "kotlin-compose" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

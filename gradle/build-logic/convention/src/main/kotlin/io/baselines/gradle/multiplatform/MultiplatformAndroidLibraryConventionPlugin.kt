@@ -1,7 +1,6 @@
 package io.baselines.gradle.multiplatform
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-import com.android.build.api.dsl.androidLibrary
 import io.baselines.gradle.Versions
 import io.baselines.gradle.libs
 import org.gradle.api.Plugin
@@ -46,6 +45,7 @@ fun Project.androidLibrary(
 
 private fun Project.androidLibrary(block: KotlinMultiplatformAndroidLibraryTarget.() -> Unit) {
     extensions.configure<KotlinMultiplatformExtension> {
-        androidLibrary(block)
+        targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java)
+            .configureEach { block() }
     }
 }
