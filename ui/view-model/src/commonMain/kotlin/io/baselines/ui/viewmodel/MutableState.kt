@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalForInheritanceCoroutinesApi::class)
+
 package io.baselines.ui.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -35,8 +38,8 @@ import kotlinx.coroutines.flow.update
 class MutableState<T>(
     scope: CoroutineScope,
     initialValue: T,
-    factory: (suspend () -> T)? = null,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
+    private val factory: (suspend () -> T)? = null,
     private val write: MutableStateFlow<T> = MutableStateFlow(initialValue),
     read: StateFlow<T> = write
         .onStart { factory?.let { write.update { factory.invoke() } } }
@@ -54,4 +57,18 @@ class MutableState<T>(
      * @param function A transformation function to apply to the current state value.
      */
     fun update(function: (T) -> T) = write.update(function)
+
+    /**
+     * Re-runs the original [factory] and replaces the current state with the newly produced value.
+     * Useful when external actions change the underlying data source and the cached state needs to
+     * be refreshed without recreating the whole view model.
+     *
+     * ## Example
+     * `mutableState.recreate()`
+     */
+    suspend fun recreate() {
+        factory?.invoke()?.let { recreatedState ->
+            write.update { recreatedState }
+        }
+    }
 }

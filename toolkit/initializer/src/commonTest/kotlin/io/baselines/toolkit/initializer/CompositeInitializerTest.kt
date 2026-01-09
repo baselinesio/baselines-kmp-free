@@ -2,49 +2,38 @@
 
 package io.baselines.toolkit.initializer
 
+import dev.zacsweers.metro.Provider
 import io.baselines.toolkit.coroutines.AppDispatchers
 import kotlin.random.Random
 import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 
 
 class CompositeInitializerTest {
 
-    private val asyncInitializers = mutableSetOf<Lazy<AsyncInitializer>>()
-    private val coreInitializers = mutableSetOf<Lazy<Initializer>>()
-    private val sut: CompositeInitializer = CompositeInitializer(
-        asyncInitializersLazy = asyncInitializers,
-        coreInitializersLazy = coreInitializers,
-        appDispatchers = AppDispatchers(),
-    )
-
-    @BeforeTest
-    fun setup() {
-        Dispatchers.setMain(StandardTestDispatcher())
-    }
+    private val asyncInitializers = mutableMapOf<Int, Provider<AsyncInitializer>>()
+    private val coreInitializers = mutableMapOf<Int, Provider<Initializer>>()
 
     @AfterTest
     fun tearDown() {
         asyncInitializers.clear()
         coreInitializers.clear()
-        Dispatchers.resetMain()
     }
 
     @Test
-    fun init_followsListOrder_coreInitRunsFirst() {
+    fun init_followsListOrder_coreInitRunsFirst() = runTest {
+        /* Given 1 */
+        val sut = createSut(testScheduler)
         val initResults = mutableListOf<String>()
         val asyncInitializer1 = createMockAsyncInitializer(result = Result.success(Unit)) {
             initResults.add("async1")
@@ -52,88 +41,111 @@ class CompositeInitializerTest {
         val asyncInitializer2 = createMockAsyncInitializer(result = Result.success(Unit)) {
             initResults.add("async2")
         }
-        asyncInitializers.addAll(arrayOf(asyncInitializer1, asyncInitializer2))
+        asyncInitializers.putAll(arrayOf(0 to asyncInitializer1, 1 to asyncInitializer2))
 
+        /* Given 2 */
         val coreInitializer1 = createMockCoreInitializer(result = Result.success(Unit)) {
             initResults.add("core1")
         }
         val coreInitializer2 = createMockCoreInitializer(result = Result.success(Unit)) {
             initResults.add("core2")
         }
-        coreInitializers.addAll(arrayOf(coreInitializer1, coreInitializer2))
+        coreInitializers.putAll(arrayOf(3 to coreInitializer2, 2 to coreInitializer1))
 
-        runTest {
-            sut.resultFlow
-                .onSubscription { sut.initialize() }
-                .first()
+        /* When */
+        sut.resultFlow
+            .onSubscription { sut.initialize() }
+            .first()
 
-            assertSame("core1", initResults[0])
-            assertSame("core2", initResults[1])
-            assertSame("async1", initResults[2])
-            assertSame("async2", initResults[3])
-        }
+        /* Then */
+        assertSame("core1", initResults[0])
+        assertSame("core2", initResults[1])
+        assertSame("async1", initResults[2])
+        assertSame("async2", initResults[3])
     }
 
     @Test
-    fun init_returnsSuccess_whenEveryInitializerSucceeds() {
+    fun init_returnsSuccess_whenEveryInitializerSucceeds() = runTest {
+        /* Given 1 */
+        val sut = createSut(testScheduler)
         val asyncInitializer = createMockAsyncInitializer(result = Result.success(Unit))
-        asyncInitializers.add(asyncInitializer)
+        asyncInitializers[0] = asyncInitializer
 
+        /* Given 2 */
         val coreInitializer = createMockCoreInitializer(result = Result.success(Unit))
-        coreInitializers.add(coreInitializer)
+        coreInitializers[1] = coreInitializer
 
-        runTest {
-            val result = sut.resultFlow
-                .onSubscription { sut.initialize() }
-                .first()
+        /* When */
+        val result = sut.resultFlow
+            .onSubscription { sut.initialize() }
+            .first()
 
-            assertTrue { result.isSuccess }
-        }
+        /* Then */
+        assertTrue { result.isSuccess }
     }
 
     @Test
-    fun init_returnsFailure_whenCoreInitFails() {
+    fun init_returnsFailure_whenCoreInitFails() = runTest {
+        /* Given 1 */
+        val sut = createSut(testScheduler)
         val asyncInitializer = createMockAsyncInitializer(result = Result.success(Unit))
-        asyncInitializers.add(asyncInitializer)
+        asyncInitializers[0] = asyncInitializer
 
+        /* Given 2 */
         val coreInitializer = createMockCoreInitializer<Unit>(
             Result.failure(RuntimeException("Test: expected error"))
         )
-        coreInitializers.add(coreInitializer)
+        coreInitializers[1] = coreInitializer
 
-        runTest {
-            val result = sut.resultFlow
-                .onSubscription { sut.initialize() }
-                .first()
+        /* When */
+        val result = sut.resultFlow
+            .onSubscription { sut.initialize() }
+            .first()
 
-            assertTrue { result.isFailure }
-        }
+        /* Then */
+        assertTrue { result.isFailure }
     }
 
     @Test
-    fun init_returnsFailure_whenAsyncInitFails() {
+    fun init_returnsFailure_whenAsyncInitFails() = runTest {
+        /* Given 1 */
+        val sut = createSut(testScheduler)
         val asyncInitializer = createMockAsyncInitializer<Unit>(
             Result.failure(RuntimeException("Test: expected error"))
         )
-        asyncInitializers.add(asyncInitializer)
+        asyncInitializers[0] = asyncInitializer
 
+        /* Given 2 */
         val coreInitializer = createMockCoreInitializer(Result.success(Unit))
-        coreInitializers.add(coreInitializer)
+        coreInitializers[1] = coreInitializer
 
-        runTest {
-            val result = sut.resultFlow
-                .onSubscription { sut.initialize() }
-                .first()
+        /* When */
+        val result = sut.resultFlow
+            .onSubscription { sut.initialize() }
+            .first()
 
-            assertTrue { result.isFailure }
-        }
+        /* Then */
+        assertTrue { result.isFailure }
+    }
+
+    private fun createSut(scheduler: TestCoroutineScheduler): CompositeInitializer {
+        val testDispatcher = StandardTestDispatcher(scheduler)
+        return CompositeInitializer(
+            asyncInitializerProviders = asyncInitializers,
+            coreInitializerProviders = coreInitializers,
+            appDispatchers = AppDispatchers(
+                io = testDispatcher,
+                main = testDispatcher,
+                default = testDispatcher,
+            ),
+        )
     }
 
     private fun <T> createMockAsyncInitializer(
         result: Result<T>,
         initCallback: () -> Unit = {},
-    ): Lazy<AsyncInitializer> {
-        return lazy {
+    ): Provider<AsyncInitializer> {
+        return Provider {
             object : AsyncInitializer {
                 override suspend fun init() {
                     delay(Random.nextLong(from = 0, until = 30))
@@ -149,8 +161,8 @@ class CompositeInitializerTest {
     private fun <T> createMockCoreInitializer(
         result: Result<T>,
         initCallback: () -> Unit = {},
-    ): Lazy<Initializer> {
-        return lazy {
+    ): Provider<Initializer> {
+        return Provider {
             object : Initializer {
                 override suspend fun init() {
                     delay(Random.nextLong(from = 0, until = 30))

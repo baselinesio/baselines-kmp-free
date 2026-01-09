@@ -12,6 +12,7 @@ androidLibrary("io.baselines.sample.ui.home")
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.domain)
             implementation(projects.toolkit.logger)
             implementation(projects.toolkit.coroutines)
             implementation(projects.ui.designSystem)

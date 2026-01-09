@@ -11,25 +11,25 @@ import androidx.compose.ui.unit.dp
 internal val LocalShapes = staticCompositionLocalOf { AppShapes() }
 
 internal val DefaultShapes = AppShapes(
-    roundSmall = RoundedCornerShape(8.dp),
-    roundMedium = RoundedCornerShape(16.dp),
-    roundLarge = RoundedCornerShape(24.dp),
+    roundedSmall = RoundedCornerShape(8.dp),
+    roundedMedium = RoundedCornerShape(12.dp),
+    roundedLarge = RoundedCornerShape(24.dp),
 )
 
 @Immutable
 data class AppShapes(
-    val roundSmall: CornerBasedShape = ShapeDefaults.Small,
-    val roundMedium: CornerBasedShape = ShapeDefaults.Medium,
-    val roundLarge: CornerBasedShape = ShapeDefaults.Large,
-    val roundBottomLarge: CornerBasedShape = RoundedCornerShape(
+    val roundedSmall: CornerBasedShape = ShapeDefaults.Small,
+    val roundedMedium: CornerBasedShape = ShapeDefaults.Medium,
+    val roundedLarge: CornerBasedShape = ShapeDefaults.Large,
+    val roundedBottomLarge: CornerBasedShape = RoundedCornerShape(
         topStart = CornerSize(0.dp),
         topEnd = CornerSize(0.dp),
-        bottomStart = roundLarge.bottomStart,
-        bottomEnd = roundLarge.bottomEnd,
+        bottomStart = roundedLarge.bottomStart,
+        bottomEnd = roundedLarge.bottomEnd,
     ),
-    val roundTopMedium: CornerBasedShape = RoundedCornerShape(
-        topStart = roundMedium.topStart,
-        topEnd = roundMedium.topEnd,
+    val roundedTopMedium: CornerBasedShape = RoundedCornerShape(
+        topStart = roundedMedium.topStart,
+        topEnd = roundedMedium.topEnd,
         bottomStart = CornerSize(0.dp),
         bottomEnd = CornerSize(0.dp),
     ),

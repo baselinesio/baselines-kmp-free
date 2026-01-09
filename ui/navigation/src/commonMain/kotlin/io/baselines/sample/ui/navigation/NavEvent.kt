@@ -3,6 +3,7 @@
 package io.baselines.sample.ui.navigation
 
 import androidx.compose.runtime.Immutable
+import io.baselines.sample.domain.api.NavRoute
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -33,7 +34,7 @@ sealed interface NavEvent {
     ) : NavEvent
 
     /**
-     * Represents a forward navigation to a specific [NavRoute], optionally customized
+     * Represents a forward navigation to a specific [io.baselines.sample.domain.api.NavRoute], optionally customized
      * with a [RouteNavOptionsBuilder] (e.g., for animations or stack behavior).
      *
      * @param route The destination route to navigate to.

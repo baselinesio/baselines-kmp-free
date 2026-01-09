@@ -1,4 +1,3 @@
-import io.baselines.gradle.addKspDependencyForAllTargets
 import io.baselines.gradle.multiplatform.androidLibrary
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -16,7 +15,15 @@ kotlin {
         binaries.framework {
             baseName = "BaselinesSampleCompose"
             isStatic = true
+
+            binaries.configureEach {
+                // Add linker flag for SQLite. See:
+                // https://github.com/touchlab/SQLiter/issues/77
+                linkerOpts("-lsqlite3")
+            }
+
             export(projects.toolkit.config)
+            export(projects.toolkit.initializer)
         }
     }
 
@@ -27,9 +34,9 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.domain)
 
-            implementation(projects.toolkit.initializer)
             implementation(projects.toolkit.logger)
             implementation(projects.toolkit.coroutines)
+            api(projects.toolkit.initializer)
             api(projects.toolkit.config)
 
             implementation(projects.ui.designSystem)
@@ -42,5 +49,3 @@ kotlin {
         }
     }
 }
-
-addKspDependencyForAllTargets(libs.kotlin.inject.compiler)

@@ -1,5 +1,6 @@
 package io.baselines.sample.ui.navigation
 
+import io.baselines.sample.domain.api.NavRoute
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -23,7 +24,7 @@ interface Navigator {
      * Requests navigation to the specified [route]. Optionally allows custom navigation options such as pop-up
      * behavior, animations, or launch flags through [navOptionsBuilder].
      *
-     * @param route The [NavRoute] destination to navigate to.
+     * @param route The [io.baselines.sample.domain.api.NavRoute] destination to navigate to.
      * @param navOptionsBuilder Optional builder to customize navigation behavior.
      */
     fun navigate(

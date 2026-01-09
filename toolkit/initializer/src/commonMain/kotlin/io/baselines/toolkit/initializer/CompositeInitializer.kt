@@ -1,5 +1,9 @@
 package io.baselines.toolkit.initializer
 
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.Provider
+import dev.zacsweers.metro.SingleIn
 import io.baselines.toolkit.coroutines.AppDispatchers
 import io.baselines.toolkit.logger.Logger
 import kotlin.time.TimeSource
@@ -11,9 +15,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.AppScope
-import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 /**
  * Orchestrates application startup by coordinating execution of both core (blocking) and async (non-blocking) initializers.
@@ -28,15 +29,15 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
  *
  * This class is typically invoked from the application’s main entry point (e.g., during splash or launcher flow).
  *
- * @param asyncInitializersLazy Non-blocking initializers to be run after the core ones.
- * @param coreInitializersLazy Blocking initializers that must complete before the app proceeds.
+ * @param asyncInitializerProviders Non-blocking initializers to be run after the core ones.
+ * @param coreInitializerProviders Blocking initializers that must complete before the app proceeds.
  * @param appDispatchers App-specific coroutine dispatchers for managing thread context.
  */
 @Inject
 @SingleIn(AppScope::class)
 class CompositeInitializer(
-    private val asyncInitializersLazy: Set<Lazy<AsyncInitializer>>,
-    private val coreInitializersLazy: Set<Lazy<Initializer>>,
+    private val asyncInitializerProviders: Map<Int, Provider<AsyncInitializer>>,
+    private val coreInitializerProviders: Map<Int, Provider<Initializer>>,
     private val appDispatchers: AppDispatchers,
 ) {
     private val resultStateFlow = MutableSharedFlow<Result<Unit>>(
@@ -45,7 +46,6 @@ class CompositeInitializer(
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     private val scope: CoroutineScope = CoroutineScope(appDispatchers.main)
-
 
     /**
      * A [Flow] that emits the result of the entire app initialization process.
@@ -63,12 +63,19 @@ class CompositeInitializer(
      * 2. If all succeed, continues with [AsyncInitializer]s on the **default dispatcher**.
      * 3. Emits the final result via [resultFlow].
      */
+    @Suppress("UNCHECKED_CAST")
     fun initialize() {
         scope.launch {
-            val coreInitResult = executeInit(coreInitializersLazy)
+            val coreInitializers = coreInitializerProviders.entries
+                .sortedBy { it.key }
+                .map { it.value }
+            val coreInitResult = executeInit(coreInitializers)
             if (coreInitResult.isSuccess) {
                 withContext(appDispatchers.default) {
-                    val asyncInitResult = executeInit(asyncInitializersLazy)
+                    val asyncInitializers = asyncInitializerProviders.entries
+                        .sortedBy { it.key }
+                        .map { it.value }
+                    val asyncInitResult = executeInit(asyncInitializers as List<Provider<Initializer>>)
                     resultStateFlow.emit(asyncInitResult)
                 }
             } else {
@@ -77,10 +84,10 @@ class CompositeInitializer(
         }
     }
 
-    private suspend fun executeInit(initializersLazy: Set<Lazy<Initializer>>): Result<Unit> {
+    private suspend fun executeInit(initializerProviders: List<Provider<Initializer>>): Result<Unit> {
         val results = mutableListOf<Result<Unit>>()
-        for (initializerLazy in initializersLazy) {
-            val initializer by initializerLazy
+        for (initializerProvider in initializerProviders) {
+            val initializer = initializerProvider()
             val initStartTimeMark = TimeSource.Monotonic.markNow()
             val result = runCatching { initializer.init() }
             val initDurationMillis = initStartTimeMark.elapsedNow().inWholeMilliseconds

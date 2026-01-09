@@ -112,7 +112,7 @@ fun PlaygroundScreen(
                                 )
                             }
                         },
-                        shape = AppTheme.shapes.roundMedium,
+                        shape = AppTheme.shapes.roundedMedium,
                         onValueChange = onSearchInputChanged,
                     )
                 }

@@ -1,10 +1,14 @@
 package io.baselines.sample.ui.designsystem.loading
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.updateAndGet
 
 /**
  * Default implementation of [LoadingController].
@@ -14,22 +18,36 @@ import kotlinx.coroutines.flow.updateAndGet
  */
 class LoadingControllerImpl : LoadingController {
 
-    private val loadingCounter = MutableStateFlow(0)
-    private val _loadingStateFlow = MutableStateFlow<LoadingStateUm?>(null)
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    private val state = MutableStateFlow(State())
 
-    override val loading: StateFlow<LoadingStateUm?> = _loadingStateFlow.asStateFlow()
+    override val loading: StateFlow<LoadingStateUm?> = state.map { it.loading }
+        .stateIn(
+            scope = scope,
+            SharingStarted.Eagerly,
+            null
+        )
 
     override suspend fun <T> withLoadingIndication(
-        loadingProgress: LoadingStateUm,
+        loading: LoadingStateUm,
         block: suspend () -> T
     ): T {
-        loadingCounter.update { it.inc() }
-        _loadingStateFlow.update { loadingProgress }
-        return block.invoke().also {
-            val counter = loadingCounter.updateAndGet {
-                if (it > 0) it.dec() else it
+        state.update { it.copy(counter = it.counter.inc(), loading = loading) }
+        return try {
+            block()
+        } finally {
+            state.update {
+                val updatedCounter = (it.counter.dec()).coerceAtLeast(0)
+                it.copy(
+                    counter = updatedCounter,
+                    loading = if (updatedCounter == 0) null else it.loading
+                )
             }
-            if (counter == 0) _loadingStateFlow.update { null }
         }
     }
+
+    private data class State(
+        val counter: Int = 0,
+        val loading: LoadingStateUm? = null
+    )
 }

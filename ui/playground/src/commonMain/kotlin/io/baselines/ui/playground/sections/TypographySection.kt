@@ -5,13 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.toolkit.di.UiScope
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-@ContributesBinding(UiScope::class, multibinding = true)
+@ContributesIntoSet(UiScope::class)
 class TypographySection : PlaygroundSection {
 
     override val name: String = "Typography"

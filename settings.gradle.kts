@@ -29,6 +29,7 @@ include(":app:android")
 include(":app:compose")
 
 include(":domain")
+include(":domain:api")
 
 include(":toolkit:di")
 include(":toolkit:initializer")

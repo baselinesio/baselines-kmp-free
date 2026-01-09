@@ -3,15 +3,17 @@ package io.baselines.sample.compose.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.navOptions
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
 import io.baselines.sample.ui.navigation.NavEvent
 import io.baselines.sample.ui.navigation.Navigator
 import io.baselines.toolkit.di.UiScope
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Inject
 @SingleIn(UiScope::class)
 class ComposeNavigator(

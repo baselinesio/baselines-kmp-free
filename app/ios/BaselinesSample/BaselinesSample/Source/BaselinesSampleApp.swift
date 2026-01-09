@@ -8,7 +8,7 @@ struct BaselinesSampleApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let uiComponent = delegate.applicationComponent.uiComponentFactory.createUiComponent()
+            let uiComponent = IosUiComponentKt.createComponent(appComponent: delegate.applicationComponent)
             ContentView(uiComponent: uiComponent)
         }
     }

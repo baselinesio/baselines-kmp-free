@@ -3,15 +3,20 @@ package io.baselines.ui.playground.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
+import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
 import io.baselines.sample.ui.designsystem.loading.LoadingController
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.ui.playground.sections.PlaygroundSection
 import io.baselines.ui.viewmodel.BaselineViewModel
 import kotlinx.collections.immutable.toImmutableList
-import me.tatarka.inject.annotations.Assisted
-import me.tatarka.inject.annotations.Inject
 
-@Inject
+@AssistedInject
 class PlaygroundViewModel(
     private val appConfigManager: AppConfigManager,
     @Assisted private val sections: Set<PlaygroundSection>,
@@ -47,5 +52,14 @@ class PlaygroundViewModel(
             }.toImmutableList()
             sectionFactoriesFlow.update { sections }
         }
+    }
+
+    @AssistedFactory
+    @ContributesIntoMap(AppScope::class)
+    @ManualViewModelAssistedFactoryKey(Factory::class)
+    fun interface Factory : ManualViewModelAssistedFactory {
+        fun create(
+            sections: Set<PlaygroundSection>,
+        ): PlaygroundViewModel
     }
 }

@@ -14,13 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.toolkit.di.UiScope
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-@ContributesBinding(UiScope::class, multibinding = true)
+@ContributesIntoSet(UiScope::class)
 class SpacingsSection : PlaygroundSection {
 
     override val name: String = "Spacings"
@@ -38,6 +38,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Element small",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier
@@ -52,6 +53,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Element medium",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier
@@ -66,6 +68,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Element large",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier
@@ -82,6 +85,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Layout small",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier
@@ -96,6 +100,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Layout medium",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier
@@ -110,6 +115,7 @@ private fun Spacings() {
             Text(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 text = "Layout large",
+                style = AppTheme.typography.bodyMedium,
             )
             Box(
                 modifier = Modifier

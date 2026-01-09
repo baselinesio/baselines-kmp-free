@@ -8,13 +8,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import dev.zacsweers.metro.asContribution
+import io.baselines.sample.compose.di.AndroidUiComponent
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 open class BaselineActivity : ComponentActivity() {
 
     private val uiComponent by lazy {
-        application.appComponent.uiComponentFactory.createUiComponent()
+        application.appComponent.asContribution<AndroidUiComponent.Factory>().createUiComponent()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

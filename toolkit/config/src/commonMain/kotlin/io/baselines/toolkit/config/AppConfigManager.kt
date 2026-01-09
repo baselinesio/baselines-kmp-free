@@ -1,6 +1,7 @@
 package io.baselines.toolkit.config
 
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 
 /**
  * A contract for managing and observing the application's configuration state.
@@ -24,6 +25,17 @@ interface AppConfigManager {
      * This flow does not operate on a specific dispatcher—collect on an appropriate context if needed.
      */
     val appConfig: StateFlow<AppConfig>
+
+    /**
+     * Suspends and returns the latest [AppConfig] value from [appConfig].
+     *
+     * This is a convenient, suspending alias for `appConfig.first()`, useful when you need
+     * to read the configuration once inside a coroutine without keeping a long-lived
+     * subscription to the flow.
+     *
+     * This function is cancellable and should be called from a coroutine context.
+     */
+    suspend fun latest(): AppConfig = appConfig.first()
 
     /**
      * Returns the current [AppConfig] without requiring flow collection.

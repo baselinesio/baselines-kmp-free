@@ -1,18 +1,20 @@
 package io.baselines.sample.compose.di
 
 import android.app.Application
-import me.tatarka.inject.annotations.Component
-import me.tatarka.inject.annotations.Provides
-import software.amazon.lastmile.kotlin.inject.anvil.AppScope
-import software.amazon.lastmile.kotlin.inject.anvil.MergeComponent
-import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.DependencyGraph
+import dev.zacsweers.metro.Includes
+import dev.zacsweers.metro.Provides
 
-@MergeComponent(AppScope::class)
-@SingleIn(AppScope::class)
-abstract class AndroidAppComponent(
-    @get:Provides val application: Application,
-    @Component override val platformComponent: AndroidPlatformComponent
-) : AppComponent {
+@DependencyGraph(AppScope::class)
+interface AndroidAppComponent : AppComponent {
 
-    abstract val uiComponentFactory: AndroidUiComponent.Factory
+    @DependencyGraph.Factory
+    fun interface Factory {
+
+        fun create(
+            @Includes platformComponent: AndroidPlatformComponent,
+            @Provides application: Application,
+        ): AndroidAppComponent
+    }
 }

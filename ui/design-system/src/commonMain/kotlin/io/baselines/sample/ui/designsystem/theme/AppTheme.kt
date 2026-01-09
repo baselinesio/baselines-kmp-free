@@ -40,9 +40,11 @@ fun AppTheme(
     val typography = DefaultTypography
     val shapes = DefaultShapes
     val colorScheme = if (darkTheme) AppThemeDark else AppThemeLight
+    val shadows = AppLightSchemeShadows
     CompositionLocalProvider(
         LocalSpacings provides spacings,
         LocalShapes provides shapes,
+        LocalShadows provides shadows,
     ) {
         MaterialTheme(
             content = content,
@@ -105,4 +107,13 @@ object AppTheme {
     val shapes: AppShapes
         @Composable
         get() = LocalShapes.current
+
+    /**
+     * Retrieves the current [AppShadows] instance from the composition.
+     *
+     * Defines the shadow system used across components (e.g., color, spread, radius).
+     */
+    val shadows: AppShadows
+        @Composable
+        get() = LocalShadows.current
 }

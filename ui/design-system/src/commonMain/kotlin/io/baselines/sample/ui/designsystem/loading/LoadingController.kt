@@ -44,15 +44,15 @@ interface LoadingController {
     /**
      * Wraps a suspending [block] with a loading indication.
      *
-     * Automatically emits the given [loadingProgress] state before the operation starts,
+     * Automatically emits the given [loading] state before the operation starts,
      * and clears it once the operation completes. Supports nested loading states via an internal counter.
      *
-     * @param loadingProgress The loading UI state to be shown during execution.
+     * @param loading The loading UI state to be shown during execution.
      * @param block The suspending function to wrap.
      * @return The result of [block].
      */
     suspend fun <T> withLoadingIndication(
-        loadingProgress: LoadingStateUm,
+        loading: LoadingStateUm,
         block: suspend () -> T
     ): T
 

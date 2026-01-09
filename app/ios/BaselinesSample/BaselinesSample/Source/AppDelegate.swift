@@ -4,7 +4,7 @@ import SwiftUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let platformComponent: IosPlatformComponent = IosPlatformComponentImpl()
-    lazy var applicationComponent: IosAppComponent = IosAppComponentCreateComponentKt.createAppComponent(
+    lazy var applicationComponent: IosAppComponent = IosAppComponentKt.createComponent(
             platformComponent: platformComponent
     )
 

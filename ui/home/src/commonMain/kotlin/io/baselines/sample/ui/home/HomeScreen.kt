@@ -3,12 +3,12 @@ package io.baselines.sample.ui.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import io.baselines.sample.ui.designsystem.components.button.AppButton
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 
 @Composable
@@ -24,9 +24,10 @@ fun HomeScreen(
         )
     ) {
         Text("{ Home }")
-        Button(onClick = onOpenPlaygroundClicked) {
-            Text("Go to Playground")
-        }
+        AppButton(
+            onClick = onOpenPlaygroundClicked,
+            label = "Go to Playground",
+        )
     }
 }
 

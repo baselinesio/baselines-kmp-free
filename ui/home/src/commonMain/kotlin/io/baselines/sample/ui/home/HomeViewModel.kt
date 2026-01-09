@@ -1,12 +1,22 @@
 package io.baselines.sample.ui.home
 
 import androidx.compose.runtime.Composable
-import io.baselines.sample.ui.navigation.AppNavRoutes
+import androidx.lifecycle.ViewModel
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.binding
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
+import io.baselines.sample.domain.api.AppNavRoutes
 import io.baselines.sample.ui.navigation.Navigator
 import io.baselines.ui.viewmodel.BaselineViewModel
-import me.tatarka.inject.annotations.Inject
 
 @Inject
+@ContributesIntoMap(
+    scope = AppScope::class,
+    binding = binding<ViewModel>()
+)
+@ViewModelKey(HomeViewModel::class)
 class HomeViewModel(
     private val navigator: Navigator,
 ) : BaselineViewModel<HomeUiEvent, HomeUiState>() {

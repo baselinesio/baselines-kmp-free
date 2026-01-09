@@ -19,10 +19,10 @@ import androidx.compose.runtime.Immutable
  * // AuthModule.kt
  * @Provides
  * @IntoSet
- * fun provideAuthNavGraphEntry(vmFactory: () -> AuthViewModel): NavGraphEntry {
+ * fun provideAuthNavGraphEntry(): NavGraphEntry {
  *     return NavGraphEntry { navHost ->
  *         composable<AppNavRoutes.Auth> {
- *             AuthRoute(viewModel(vmFactory))
+ *             AuthRoute(metroViewModel())
  *         }
  *     }
  * }

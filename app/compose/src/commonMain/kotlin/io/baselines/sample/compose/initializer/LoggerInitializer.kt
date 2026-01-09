@@ -1,12 +1,12 @@
 package io.baselines.sample.compose.initializer
 
+import dev.zacsweers.metro.Inject
 import io.baselines.toolkit.config.AppConfig.Platform
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.toolkit.initializer.Initializer
 import io.baselines.toolkit.logger.KermitWriter
 import io.baselines.toolkit.logger.Logger
 import kotlinx.coroutines.flow.first
-import me.tatarka.inject.annotations.Inject
 
 @Inject
 class LoggerInitializer(

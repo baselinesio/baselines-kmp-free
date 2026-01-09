@@ -107,6 +107,11 @@ def fix_package_structure(
         project_dir / "app" / "compose" / "src" / "commonMain" / "kotlin",
         project_dir / "app" / "compose" / "src" / "iosMain" / "kotlin",
         project_dir / "domain" / "src" / "commonMain" / "kotlin",
+        project_dir / "domain" / "api" / "src" / "commonMain" / "kotlin",
+        project_dir / "data" / "database-delight" / "src" / "commonMain" / "kotlin",
+        project_dir / "data" / "database-delight" / "src" / "iosMain" / "kotlin",
+        project_dir / "data" / "database-delight" / "src" / "androidMain" / "kotlin",
+        project_dir / "data" / "keyvalue-datastore" / "src" / "commonMain" / "kotlin",
         project_dir / "ui" / "design-system" / "src" / "commonMain" / "kotlin",
         project_dir / "ui" / "navigation" / "src" / "commonMain" / "kotlin",
         project_dir / "ui" / "home" / "src" / "commonMain" / "kotlin",
@@ -188,7 +193,6 @@ def main():
     new_package_name = user_input("1) New package name (e.g. com.example): ")
     new_app_name = user_input("2) New app name (no spaces, e.g. MyNewApp): ")
     new_app_display_name = user_input("3) New app display name (e.g. My New App): ")
-    new_org_name = user_input("4) New org name (e.g. myOrg): ")
 
     new_project_dir = current_dir / new_app_name
     print(f"Copying baseline to '{new_project_dir}' …")
@@ -209,7 +213,6 @@ def main():
         if f.is_file():
             replace_in_file(f, "BaselinesSample", new_app_name)
             replace_in_file(f, "Baselines Sample", new_app_display_name)
-            replace_in_file(f, "baselines-sample", new_org_name)
 
     print("Adjusting package structure …")
     fix_package_structure(new_project_dir, "io.baselines.sample", new_package_name)

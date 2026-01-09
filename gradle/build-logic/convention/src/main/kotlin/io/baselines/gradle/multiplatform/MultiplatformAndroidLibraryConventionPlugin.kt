@@ -32,6 +32,7 @@ fun Project.androidLibrary(
         minSdk = Versions.MIN_SDK
         compileSdk = Versions.COMPILE_SDK
         enableCoreLibraryDesugaring = true
+        androidResources.enable = true
 
         compilerOptions { jvmTarget.set(JvmTarget.fromTarget(Versions.JAVA_VERSION.toString())) }
 

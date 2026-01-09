@@ -32,7 +32,7 @@ fun CollapsingSection(
     ) {
         Row(
             modifier = Modifier
-                .clip(AppTheme.shapes.roundMedium)
+                .clip(AppTheme.shapes.roundedMedium)
                 .clickable(onClick = { onExpandedChanged(!expanded) })
                 .then(modifier)
                 .padding(AppTheme.spacings.layoutMedium),

@@ -1,9 +1,9 @@
 package io.baselines.sample.compose.initializer
 
+import dev.zacsweers.metro.Inject
 import io.baselines.toolkit.config.AppConfig
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.toolkit.initializer.Initializer
-import me.tatarka.inject.annotations.Inject
 
 @Inject
 class AppConfigInitializer(

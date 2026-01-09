@@ -1,19 +1,25 @@
 package io.baselines.sample.compose.di
 
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.GraphExtension
+import dev.zacsweers.metro.asContribution
 import io.baselines.sample.compose.ui.BaselineViewController
 import io.baselines.toolkit.di.UiScope
-import software.amazon.lastmile.kotlin.inject.anvil.AppScope
-import software.amazon.lastmile.kotlin.inject.anvil.ContributesSubcomponent
-import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
-@ContributesSubcomponent(UiScope::class)
-@SingleIn(UiScope::class)
+@GraphExtension(UiScope::class)
 interface IosUiComponent : UiComponent {
 
     val baselineViewController: BaselineViewController
 
-    @ContributesSubcomponent.Factory(AppScope::class)
-    interface Factory {
+    @ContributesTo(AppScope::class)
+    @GraphExtension.Factory
+    fun interface Factory {
+
         fun createUiComponent(): IosUiComponent
     }
+}
+
+fun createComponent(appComponent: IosAppComponent): IosUiComponent {
+    return appComponent.asContribution<IosUiComponent.Factory>().createUiComponent()
 }
