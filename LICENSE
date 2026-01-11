@@ -1,44 +1,66 @@
-baselines.io Free Tier License (Version 1.0)
+baselines.io Free Tier License (Version 1.1)
 
-Copyright (c) 2025 baselines.io. All rights reserved.
+Copyright (c) 2026 baselines.io
 
-This license governs the use of the free-tier version of the baselines.io Starter Kit (the "Product").
+This license governs the use of the baselines.io Free Tier Starter Kit (the “Product”).
 
-1. Permission
+---
 
-You are permitted to:
-- Use, modify, and distribute the Product for personal or commercial use, including as part of client work or internal projects.
-- Include the Product (in whole or in part) in your applications, services, or tools that are delivered to end users.
+1. Grant of Permission
+
+You are granted a non-exclusive, royalty-free license to:
+
+- Use, modify, and integrate the Product into personal, commercial, client, or internal projects.
+- Distribute applications or services that include the Product, in whole or in part, to end users.
+
+---
 
 2. Conditions
 
 You must:
+
 - Include a copy of this license in any distribution of the Product or its modified versions.
-- Attribute the original work to baselines.io with a link to https://baselines.io.
+- Attribute baselines.io in documentation, NOTICE files, or similar materials (UI attribution is not required).
+
+---
 
 3. Restrictions
 
 You may not:
-- Resell, sublicense, or redistribute the Product (original or modified) as a starter kit, boilerplate, SDK, code generator, or template, whether free or paid.
-- Use the Product to create or contribute to any competing development product (e.g. starter kits, reusable project templates, or frameworks).
-- Represent the Product as your original creation without attribution to baselines.io.
+
+- Sell, sublicense, or redistribute the Product (original or modified) as a standalone product, starter kit, boilerplate, SDK, framework, or code generation tool.
+- Use the Product to create or offer a competing mobile development platform, starter kit, or reusable project foundation intended for third-party reuse.
+- Remove or falsify copyright notices or attribution.
+
+These restrictions do not limit:
+- Use within proprietary or client applications
+- Internal tooling or infrastructure
+- Open-sourcing applications built on top of the Product
+
+---
 
 4. No Warranty
 
-THE PRODUCT IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND. THE AUTHORS ARE NOT LIABLE FOR ANY DAMAGES OR CLAIMS ARISING FROM ITS USE.
+THE PRODUCT IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY.
+
+---
 
 5. Termination
 
-Your rights under this license terminate automatically if you breach any of its terms.
+This license automatically terminates if you violate its terms.
 
-6. Jurisdiction
+---
 
-This license is governed by the laws of Ukraine. Any disputes shall be handled within Ukrainian jurisdiction.
+6. Governing Law
+
+This license is governed by applicable local law, without regard to conflict of law provisions.
+
+---
 
 7. Contact
 
-For commercial licensing or enterprise use, contact:
+For commercial licensing, enterprise usage, or exceptions:
 
 igor@baselines.io
-+380 99 796 60 81
 https://baselines.io
