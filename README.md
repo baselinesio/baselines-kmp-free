@@ -7,11 +7,17 @@
 > open ./MyApp/app/ios/MyApp/MyApp.xcodeproj
 ```
 
+## 💬 Discussions
+
+For Q&A, Announcements and Polls, please visit our GitHub Discussions page:
+
+➡️  [github.com/baselinesio/baselines-kmp-free/discussions](https://github.com/baselinesio/baselines-kmp-free/discussions)
+
 ## 📖 Documentation
 
-For detailed guides, architecture diagrams, and how-to articles, visit docs:
+For detailed guides, overviews, samples, visit docs:
 
-➡️  [baselines-kmp/docs](./docs)
+➡️  [baselines.io/docs](https://baselines.io/docs/Overview)
 
 ---
 
