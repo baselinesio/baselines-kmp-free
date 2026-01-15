@@ -7,3 +7,7 @@ plugins {
 }
 
 androidLibrary("io.baselines.toolkit.di")
+
+metro {
+    enableKotlinVersionCompatibilityChecks.set(false)
+}

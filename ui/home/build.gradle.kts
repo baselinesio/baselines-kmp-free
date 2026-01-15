@@ -1,7 +1,7 @@
-import io.baselines.gradle.android.androidLibrary
+import io.baselines.gradle.multiplatform.androidLibrary
 
 plugins {
-    alias(libs.plugins.baselines.android.library)
+    alias(libs.plugins.baselines.multiplatform.android.library)
     alias(libs.plugins.baselines.multiplatform.kotlin)
     alias(libs.plugins.baselines.compose)
     alias(libs.plugins.baselines.di)

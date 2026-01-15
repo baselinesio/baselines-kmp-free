@@ -13,6 +13,7 @@ class DiConventionPlugin : Plugin<Project> {
         extensions.configure<MetroPluginExtension> {
             generateContributionHintsInFir.set(true)
             enableTopLevelFunctionInjection.set(true)
+            enableKotlinVersionCompatibilityChecks.set(false)
         }
         dependencies {
             if (pluginManager.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
