@@ -1,5 +1,5 @@
 [versions]
-android-gradlePlugin = "8.13.2"
+android-gradlePlugin = "9.0.0"
 android-desugarjdklibs = "2.1.5"
 kotlin = "2.3.20-Beta1"
 kotlin-serialization = "1.9.0"
