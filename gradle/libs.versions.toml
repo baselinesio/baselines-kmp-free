@@ -6,16 +6,16 @@ kotlin-serialization = "1.9.0"
 kotlin-coroutines = "1.10.2"
 kotlin-time = "0.7.1"
 kotlin-immutableCollections = "0.4.0"
-kotlin-test = "2.1.10"
+kotlin-test = "2.3.0"
 kotlin-compose-material3 = "1.10.0-alpha05"
 kotlin-compose = "1.10.0"
-androidx-compose = "1.10.0"
+androidx-compose = "1.10.1"
 androidx-compose-activity = "1.12.2"
 androidx-compose-lifecycle = "2.9.6"
 androidx-compose-navigation = "2.9.1"
 androidx-splash = "1.2.0"
 logging-kermit = "2.0.8"
-inject-metro = "0.9.4"
+metro = "0.9.4"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
@@ -35,7 +35,7 @@ androidx-compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecy
 androidx-compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
 androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
 logging-kermit = { module = "co.touchlab:kermit", version.ref = "logging-kermit" }
-metro-viewmodel = { module = "dev.zacsweers.metro:metrox-viewmodel-compose", version.ref = "inject-metro" }
+metro-viewmodel = { module = "dev.zacsweers.metro:metrox-viewmodel-compose", version.ref = "metro" }
 
 # Build logic dependencies
 android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
@@ -43,7 +43,7 @@ android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 composeCompiler-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "kotlin-compose" }
-metro-gradlePlugin = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "inject-metro" }
+metro-gradlePlugin = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "metro" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }
@@ -54,7 +54,7 @@ kotlin-compose = { id = "org.jetbrains.compose", version.ref = "kotlin-compose" 
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-inject-metro = { id = "dev.zacsweers.metro", version.ref = "inject-metro" }
+metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 
 # Local plugins
 baselines-root = { id = "io.baselines.root" }

@@ -2,7 +2,9 @@ package io.baselines.sample.compose.ui
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -39,13 +41,16 @@ class ComposeApp(
                 Scaffold(
                     snackbarHost = { ComposeSnackbarHost(hostState = state.snackbarHostState) },
                     contentWindowInsets = WindowInsets(0.dp)
-                ) {
+                ) { padding ->
                     AnimatedContent(
                         modifier = Modifier.fillMaxSize(),
                         targetState = state.navState,
                     ) { targetNavState ->
                         if (targetNavState != null) {
                             AppNavHost(
+                                modifier = Modifier
+                                    .consumeWindowInsets(padding)
+                                    .padding(padding),
                                 state = targetNavState,
                             )
                         }

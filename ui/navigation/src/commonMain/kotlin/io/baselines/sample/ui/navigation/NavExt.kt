@@ -1,5 +1,7 @@
 package io.baselines.sample.ui.navigation
 
+import androidx.navigation.NavGraph
+
 /**
  * A helper function that returns a [RouteNavOptionsBuilder] to open a new route while clearing the back stack.
  *
@@ -20,5 +22,9 @@ package io.baselines.sample.ui.navigation
  */
 fun clearTopNavOptions(inclusive: Boolean = true) = RouteNavOptionsBuilder { graph ->
     launchSingleTop = true
-    popUpTo(requireNotNull(graph.startDestinationRoute)) { this.inclusive = inclusive }
+    popUpTo(graph.root().id) { this.inclusive = inclusive }
+}
+
+private fun NavGraph.root(): NavGraph {
+    return parent?.root() ?: this
 }
