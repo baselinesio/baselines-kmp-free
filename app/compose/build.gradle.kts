@@ -34,13 +34,13 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.domain)
 
-            implementation(projects.toolkit.logger)
-            implementation(projects.toolkit.coroutines)
             api(projects.toolkit.initializer)
             api(projects.toolkit.config)
+            implementation(projects.toolkit.logger)
+            implementation(projects.toolkit.coroutines)
 
+            api(projects.ui.viewModel)
             implementation(projects.ui.designSystem)
-            implementation(projects.ui.viewModel)
             implementation(projects.ui.navigation)
             implementation(projects.ui.playground)
             implementation(projects.ui.home)

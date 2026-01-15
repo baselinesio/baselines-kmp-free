@@ -24,8 +24,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             compileOptions { isCoreLibraryDesugaringEnabled = true }
             java { toolchain { languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION)) } }
 
-            defaultConfig { minSdk = Versions.MIN_SDK }
-            defaultConfig { consumerProguardFiles("consumer-rules.pro") }
+            defaultConfig {
+                minSdk = Versions.MIN_SDK
+                consumerProguardFiles("consumer-rules.pro")
+            }
 
             testOptions {
                 targetSdk = Versions.TARGET_SDK

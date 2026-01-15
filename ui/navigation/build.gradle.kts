@@ -14,6 +14,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.domain.api)
             implementation(libs.androidx.compose.runtime)
+            implementation(libs.metro.viewmodel)
             api(libs.androidx.compose.lifecycle)
             api(libs.androidx.compose.navigation)
         }

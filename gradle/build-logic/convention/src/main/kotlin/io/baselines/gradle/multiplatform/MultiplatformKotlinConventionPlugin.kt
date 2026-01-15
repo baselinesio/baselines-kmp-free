@@ -17,8 +17,6 @@ class MultiplatformKotlinConventionPlugin : Plugin<Project> {
     private fun Project.configureMultiplatform() {
         kotlin { jvmToolchain(Versions.JAVA_VERSION) }
         multiplatform {
-            applyDefaultHierarchyTemplate()
-
             // Supported platforms
             iosArm64()
             iosSimulatorArm64()

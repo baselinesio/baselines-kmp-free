@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.androidx.compose.runtime)
+            api(libs.metro.viewmodel)
             api(libs.androidx.compose.viewModel)
             api(libs.androidx.compose.lifecycle)
         }
