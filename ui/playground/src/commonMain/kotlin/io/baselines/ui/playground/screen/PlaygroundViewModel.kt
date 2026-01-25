@@ -33,7 +33,7 @@ class PlaygroundViewModel(
         val searchInput by searchInputFlow.collectAsStateWithLifecycle()
         val sectionFactories by sectionFactoriesFlow.collectAsStateWithLifecycle()
         return PlaygroundUiState(
-            appVersion = appConfig.info.version,
+            appVersion = appConfig.appInfo.version,
             loading = loading,
             sections = sectionFactories,
             searchInput = searchInput,

@@ -14,7 +14,7 @@ class LoggerInitializer(
 ) : Initializer {
 
     override suspend fun init() {
-        val appInfo = appConfigManager.appConfig.first().info
+        val appInfo = appConfigManager.appConfig.first().appInfo
         if (appInfo.debug) {
             Logger.writer = KermitWriter(
                 printStacktrace = appInfo.platform != Platform.IOS
