@@ -1,7 +1,7 @@
 package io.baselines.toolkit.config
 
 data class AppConfig(
-    val info: AppInfo = AppInfo()
+    val appInfo: AppInfo = AppInfo()
 ) {
 
     data class AppInfo(

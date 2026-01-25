@@ -2,7 +2,7 @@
 android-gradlePlugin = "9.0.0"
 android-desugarjdklibs = "2.1.5"
 kotlin = "2.3.20-Beta1"
-kotlin-serialization = "1.9.0"
+kotlin-serialization = "1.10.0"
 kotlin-coroutines = "1.10.2"
 kotlin-time = "0.7.1"
 kotlin-immutableCollections = "0.4.0"

@@ -12,6 +12,6 @@ class AppConfigInitializer(
 ) : Initializer {
 
     override suspend fun init() {
-        appConfigManager.update { it.copy(info = appInfo) }
+        appConfigManager.update { it.copy(appInfo = appInfo) }
     }
 }
