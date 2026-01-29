@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.baselines.android.application)
     alias(libs.plugins.baselines.compose)
+    alias(libs.plugins.baselines.di)
 }
 
 android {
@@ -13,5 +14,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.splash)
     implementation(projects.app.compose)
 }

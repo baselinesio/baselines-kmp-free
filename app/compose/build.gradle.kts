@@ -28,22 +28,19 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.splash)
-        }
         commonMain.dependencies {
             implementation(projects.domain)
 
             api(projects.toolkit.initializer)
             api(projects.toolkit.config)
-            implementation(projects.toolkit.logger)
-            implementation(projects.toolkit.coroutines)
+            api(projects.toolkit.logger)
+            api(projects.toolkit.coroutines)
 
             api(projects.ui.viewModel)
-            implementation(projects.ui.designSystem)
-            implementation(projects.ui.navigation)
-            implementation(projects.ui.playground)
-            implementation(projects.ui.home)
+            api(projects.ui.designSystem)
+            api(projects.ui.navigation)
+            api(projects.ui.playground)
+            api(projects.ui.home)
 
             implementation(libs.kotlin.immutableCollections)
         }

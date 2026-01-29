@@ -1,9 +1,21 @@
 package io.baselines.sample
 
+import android.app.Application
+import dev.zacsweers.metro.createGraphFactory
+import io.baselines.sample.compose.di.AndroidAppComponent
 import io.baselines.sample.compose.di.AndroidPlatformComponent
-import io.baselines.sample.compose.ui.BaselineApplication
 
-class App : BaselineApplication() {
+class App : Application() {
 
-    override val platformComponent: AndroidPlatformComponent by lazy { AndroidPlatformComponentImpl(this) }
+    private val platformComponent: AndroidPlatformComponent by lazy { AndroidPlatformComponentImpl(this) }
+
+    val appComponent by lazy {
+        createGraphFactory<AndroidAppComponent.Factory>()
+            .create(platformComponent, this)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        appComponent.compositeInitializer.initialize()
+    }
 }
