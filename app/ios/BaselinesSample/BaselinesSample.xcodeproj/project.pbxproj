@@ -3,28 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
-		2152FB042600AC8F00CF470E /* BaselinesSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* BaselinesSampleApp.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		CF3E7C522F1162A800D03FFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3E7C512F1162A800D03FFB /* LaunchScreen.storyboard */; };
-		CFD7C3C22D32A6350082600F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD7C3C12D32A6350082600F /* AppDelegate.swift */; };
-		CFF272382DA27B8E00013625 /* PlatformComponentImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF272372DA27B8800013625 /* PlatformComponentImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2152FB032600AC8F00CF470E /* BaselinesSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaselinesSampleApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* Baselines Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baselines Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		CF3E7C512F1162A800D03FFB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CFD7C3C12D32A6350082600F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CFF272372DA27B8800013625 /* PlatformComponentImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformComponentImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CF0BA7662F2E398200F4A0A1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/AppDelegate.swift,
+				App/BaselinesSampleApp.swift,
+				App/ContentView.swift,
+				App/LaunchScreen.storyboard,
+				App/PlatformComponentImpl.swift,
+			);
+			target = 7555FF7A242A565900829871 /* BaselinesSample */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CF0BA7642F2E396F00F4A0A1 /* Sources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CF0BA7662F2E398200F4A0A1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Sources; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B92378962B6B1156000C7307 /* Frameworks */ = {
@@ -47,8 +55,9 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				CF0BA7642F2E396F00F4A0A1 /* Sources */,
+				CF96362C2D4FD28800C8FA1D /* Resources */,
 				AB1DB47929225F7C00F7AF9C /* Configuration */,
-				7555FF7D242A565900829871 /* BaselinesSample */,
 				7555FF7C242A565900829871 /* Products */,
 				42799AB246E5F90AF97AA0EF /* Frameworks */,
 			);
@@ -60,15 +69,6 @@
 				7555FF7B242A565900829871 /* Baselines Sample.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7555FF7D242A565900829871 /* BaselinesSample */ = {
-			isa = PBXGroup;
-			children = (
-				CF96362D2D4FD31200C8FA1D /* Source */,
-				CF96362C2D4FD28800C8FA1D /* Resources */,
-			);
-			path = BaselinesSample;
 			sourceTree = "<group>";
 		};
 		AB1DB47929225F7C00F7AF9C /* Configuration */ = {
@@ -85,18 +85,6 @@
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		CF96362D2D4FD31200C8FA1D /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				CFF272372DA27B8800013625 /* PlatformComponentImpl.swift */,
-				7555FF82242A565900829871 /* ContentView.swift */,
-				2152FB032600AC8F00CF470E /* BaselinesSampleApp.swift */,
-				CFD7C3C12D32A6350082600F /* AppDelegate.swift */,
-				CF3E7C512F1162A800D03FFB /* LaunchScreen.storyboard */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,7 +151,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF3E7C522F1162A800D03FFB /* LaunchScreen.storyboard in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,10 +183,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFF272382DA27B8E00013625 /* PlatformComponentImpl.swift in Sources */,
-				CFD7C3C22D32A6350082600F /* AppDelegate.swift in Sources */,
-				2152FB042600AC8F00CF470E /* BaselinesSampleApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +322,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = BaselinesSample/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = Resources/Assets.xcassets;
 				DEVELOPMENT_TEAM = "${TEAM_ID}";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -347,7 +330,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BaselinesSample/Resources/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Baselines Sample";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
@@ -377,7 +360,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = BaselinesSample/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = Resources/Assets.xcassets;
 				DEVELOPMENT_TEAM = "${TEAM_ID}";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -385,7 +368,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BaselinesSample/Resources/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Baselines Sample";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
