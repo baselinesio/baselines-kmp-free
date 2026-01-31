@@ -11,8 +11,6 @@ class DiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("dev.zacsweers.metro")
         extensions.configure<MetroPluginExtension> {
-            generateContributionHintsInFir.set(true)
-            enableTopLevelFunctionInjection.set(true)
             enableKotlinVersionCompatibilityChecks.set(false)
         }
         dependencies {
