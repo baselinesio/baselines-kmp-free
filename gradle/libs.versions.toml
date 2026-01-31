@@ -15,7 +15,7 @@ androidx-compose-lifecycle = "2.9.6"
 androidx-compose-navigation = "2.9.1"
 androidx-splash = "1.2.0"
 logging-kermit = "2.0.8"
-metro = "0.10.1"
+metro = "0.10.2"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
