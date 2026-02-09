@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
+		CFD28E112F3A1BB800B0B412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFD28E0E2F3A1BB800B0B412 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* Baselines Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baselines Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		CFD28E0E2F3A1BB800B0B412 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -23,7 +25,6 @@
 				App/AppDelegate.swift,
 				App/BaselinesSampleApp.swift,
 				App/ContentView.swift,
-				App/LaunchScreen.storyboard,
 				App/PlatformComponentImpl.swift,
 			);
 			target = 7555FF7A242A565900829871 /* BaselinesSample */;
@@ -83,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				CFD28E0E2F3A1BB800B0B412 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -152,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
+				CFD28E112F3A1BB800B0B412 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
