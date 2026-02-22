@@ -17,5 +17,5 @@ object Versions {
     // - minor and patch = 999
     // - major = 99
     const val VERSION_CODE = (((FORM_FACTOR * 1_00) + VERSION_MAJOR) * 1_000 + VERSION_MINOR) * 1_000 + VERSION_PATCH
-    const val VERSION_NAME = "$FORM_FACTOR-$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
+    const val VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 }
