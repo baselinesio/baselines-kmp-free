@@ -1,8 +1,12 @@
 package io.baselines.gradle.android
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import io.baselines.gradle.Versions
-import io.baselines.gradle.libs
+import io.baselines.gradle.ext.alias
+import io.baselines.gradle.ext.coreLibraryDesugaring
+import io.baselines.gradle.ext.java
+import io.baselines.gradle.ext.libs
+import io.baselines.gradle.ext.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.jvm.toolchain.JavaLanguageVersion
@@ -13,14 +17,18 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) { apply("com.android.library") }
+            plugins {
+                alias(libs.plugins.android.library)
+            }
             configureAndroidLibrary()
         }
     }
 
     private fun Project.configureAndroidLibrary() {
         android {
-            compileSdkVersion(Versions.COMPILE_SDK)
+            compileSdk {
+                version = release(Versions.COMPILE_SDK)
+            }
             compileOptions { isCoreLibraryDesugaringEnabled = true }
             java { toolchain { languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION)) } }
 
@@ -41,8 +49,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 }
             }
         }
-
-        dependencies { "coreLibraryDesugaring"(libs.findLibrary("android.desugarjdklibs").get()) }
+        dependencies {
+            coreLibraryDesugaring(libs.android.desugarjdklibs)
+        }
     }
 
     private fun Project.android(block: LibraryExtension.() -> Unit) {

@@ -2,7 +2,10 @@ package io.baselines.gradle.multiplatform
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import io.baselines.gradle.Versions
-import io.baselines.gradle.libs
+import io.baselines.gradle.ext.alias
+import io.baselines.gradle.ext.coreLibraryDesugaring
+import io.baselines.gradle.ext.libs
+import io.baselines.gradle.ext.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -14,9 +17,9 @@ class MultiplatformAndroidLibraryConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("com.android.kotlin.multiplatform.library")
-                apply("org.jetbrains.kotlin.multiplatform")
+            plugins {
+                alias(libs.plugins.android.multiplatform.library)
+                alias(libs.plugins.kotlin.multiplatform)
             }
         }
     }
@@ -40,10 +43,7 @@ fun Project.androidLibrary(
     }
 
     dependencies {
-        add(
-            "coreLibraryDesugaring",
-            libs.findLibrary("android.desugarjdklibs").get()
-        )
+        coreLibraryDesugaring(libs.android.desugarjdklibs)
     }
 }
 

@@ -1,6 +1,9 @@
 package io.baselines.gradle.multiplatform
 
 import io.baselines.gradle.Versions
+import io.baselines.gradle.ext.alias
+import io.baselines.gradle.ext.libs
+import io.baselines.gradle.ext.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -10,7 +13,9 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 class MultiplatformKotlinConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        with(pluginManager) { apply("org.jetbrains.kotlin.multiplatform") }
+        plugins {
+            alias(libs.plugins.kotlin.multiplatform)
+        }
         configureMultiplatform()
     }
 

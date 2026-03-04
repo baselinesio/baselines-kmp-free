@@ -9,17 +9,14 @@ import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import io.baselines.sample.domain.api.AppNavRoutes
 import io.baselines.sample.ui.navigation.Navigator
-import io.baselines.ui.viewmodel.BaselineViewModel
+import io.baselines.ui.viewmodel.Mvvm
 
 @Inject
-@ContributesIntoMap(
-    scope = AppScope::class,
-    binding = binding<ViewModel>()
-)
+@ContributesIntoMap(AppScope::class, binding<ViewModel>())
 @ViewModelKey(HomeViewModel::class)
 class HomeViewModel(
     private val navigator: Navigator,
-) : BaselineViewModel<HomeUiEvent, HomeUiState>() {
+) : ViewModel(), Mvvm<HomeUiEvent, HomeUiState> {
 
     @Composable
     override fun state(): HomeUiState {

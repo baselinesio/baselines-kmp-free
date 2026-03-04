@@ -1,5 +1,5 @@
 [versions]
-android-gradlePlugin = "9.0.1"
+android-gradlePlugin = "9.1.0"
 android-desugarjdklibs = "2.1.5"
 kotlin = "2.3.20-RC"
 kotlin-serialization = "1.10.0"
@@ -9,13 +9,13 @@ kotlin-immutableCollections = "0.4.0"
 kotlin-test = "2.3.0"
 kotlin-compose-material3 = "1.10.0-alpha05"
 kotlin-compose = "1.10.1"
-androidx-compose = "1.10.3"
+androidx-compose = "1.10.4"
 androidx-compose-activity = "1.12.4"
 androidx-compose-lifecycle = "2.9.6"
 androidx-compose-navigation = "2.9.2"
 androidx-splash = "1.2.0"
 logging-kermit = "2.0.8"
-metro = "0.10.4"
+metro = "0.11.1"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
@@ -61,7 +61,6 @@ baselines-root = { id = "io.baselines.root" }
 baselines-di = { id = "io.baselines.di" }
 baselines-android-application = { id = "io.baselines.android.application" }
 baselines-android-library = { id = "io.baselines.android.library" }
-baselines-android-compose = { id = "io.baselines.android.compose" }
 baselines-multiplatform-android-library = { id = "io.baselines.multiplatform.android.library" }
 baselines-multiplatform-kotlin = { id = "io.baselines.multiplatform.kotlin" }
 baselines-compose = { id = "io.baselines.compose" }

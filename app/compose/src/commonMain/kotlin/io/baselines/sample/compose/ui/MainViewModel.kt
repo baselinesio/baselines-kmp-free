@@ -4,6 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import dev.zacsweers.metro.AppScope
@@ -18,7 +19,7 @@ import io.baselines.sample.domain.api.NavRoute
 import io.baselines.sample.ui.designsystem.components.snackbar.AppSnackbarManager
 import io.baselines.sample.ui.navigation.NavGraphEntry
 import io.baselines.toolkit.initializer.CompositeInitializer
-import io.baselines.ui.viewmodel.BaselineViewModel
+import io.baselines.ui.viewmodel.Mvvm
 import kotlinx.collections.immutable.toImmutableSet
 
 @AssistedInject
@@ -27,7 +28,7 @@ class MainViewModel(
     private val snackbarManager: AppSnackbarManager,
     @Assisted private val composeNavigator: ComposeNavigator,
     @Assisted private val navGraph: Set<NavGraphEntry>,
-) : BaselineViewModel<MainUiEvent, MainUiState>() {
+) : ViewModel(), Mvvm<MainUiEvent, MainUiState> {
 
     @Composable
     override fun state(): MainUiState {

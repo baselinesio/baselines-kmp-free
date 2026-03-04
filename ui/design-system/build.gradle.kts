@@ -16,7 +16,6 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.androidx.compose.lifecycle)
-            api(libs.androidx.compose.runtime)
             api(libs.kotlin.compose.preview)
             api(libs.kotlin.compose.material3)
             api(libs.kotlin.compose.resources)

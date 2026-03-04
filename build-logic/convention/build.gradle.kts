@@ -1,3 +1,6 @@
+import org.gradle.initialization.DependenciesAccessors
+import org.gradle.kotlin.dsl.support.serviceOf
+
 plugins {
     `kotlin-dsl`
 }
@@ -14,6 +17,12 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.metro.gradlePlugin)
     compileOnly(libs.composeCompiler.gradlePlugin)
+}
+
+gradle.serviceOf<DependenciesAccessors>().classes.asFiles.forEach {
+    dependencies {
+        compileOnly(files(it.absolutePath))
+    }
 }
 
 gradlePlugin {

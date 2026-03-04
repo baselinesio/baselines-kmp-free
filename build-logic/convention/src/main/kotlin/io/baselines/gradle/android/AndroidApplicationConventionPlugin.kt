@@ -2,7 +2,11 @@ package io.baselines.gradle.android
 
 import com.android.build.api.dsl.ApplicationExtension
 import io.baselines.gradle.Versions
-import io.baselines.gradle.libs
+import io.baselines.gradle.ext.alias
+import io.baselines.gradle.ext.coreLibraryDesugaring
+import io.baselines.gradle.ext.java
+import io.baselines.gradle.ext.libs
+import io.baselines.gradle.ext.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.jvm.toolchain.JavaLanguageVersion
@@ -15,9 +19,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("com.android.application")
-            }
+            plugins { alias(libs.plugins.android.application) }
             configureAndroidApplication()
         }
     }
@@ -54,7 +56,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
         }
 
-        dependencies { "coreLibraryDesugaring"(libs.findLibrary("android.desugarjdklibs").get()) }
+        dependencies {
+            coreLibraryDesugaring(libs.android.desugarjdklibs)
+        }
     }
 
     private fun Project.android(block: ApplicationExtension.() -> Unit) {

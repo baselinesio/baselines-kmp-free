@@ -1,6 +1,9 @@
 package io.baselines.gradle
 
 import dev.zacsweers.metro.gradle.MetroPluginExtension
+import io.baselines.gradle.ext.alias
+import io.baselines.gradle.ext.libs
+import io.baselines.gradle.ext.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -9,12 +12,12 @@ import org.gradle.kotlin.dsl.dependencies
 class DiConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        pluginManager.apply("dev.zacsweers.metro")
-        extensions.configure<MetroPluginExtension> {
+        plugins { alias(libs.plugins.metro) }
+        metro {
             enableKotlinVersionCompatibilityChecks.set(false)
         }
         dependencies {
-            if (pluginManager.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            if (pluginManager.hasPlugin(libs.plugins.kotlin.multiplatform.get().pluginId)) {
                 add(
                     "commonMainImplementation",
                     project(":toolkit:di")
@@ -26,5 +29,9 @@ class DiConventionPlugin : Plugin<Project> {
                 )
             }
         }
+    }
+
+    private fun Project.metro(action: MetroPluginExtension.() -> Unit) {
+        extensions.configure<MetroPluginExtension> { action() }
     }
 }

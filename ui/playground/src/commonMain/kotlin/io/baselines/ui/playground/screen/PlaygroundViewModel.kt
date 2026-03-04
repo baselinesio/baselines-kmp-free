@@ -2,6 +2,7 @@ package io.baselines.ui.playground.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -13,14 +14,16 @@ import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
 import io.baselines.sample.ui.designsystem.loading.LoadingController
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.ui.playground.sections.PlaygroundSection
-import io.baselines.ui.viewmodel.BaselineViewModel
+import io.baselines.ui.viewmodel.Mvvm
+import io.baselines.ui.viewmodel.launch
+import io.baselines.ui.viewmodel.mutableState
 import kotlinx.collections.immutable.toImmutableList
 
 @AssistedInject
 class PlaygroundViewModel(
     private val appConfigManager: AppConfigManager,
     @Assisted private val sections: Set<PlaygroundSection>,
-) : BaselineViewModel<PlaygroundUiEvent, PlaygroundUiState>() {
+) : ViewModel(), Mvvm<PlaygroundUiEvent, PlaygroundUiState> {
 
     private val searchInputFlow = mutableState("")
     private val sectionFactoriesFlow = mutableState(sections.toImmutableList())
