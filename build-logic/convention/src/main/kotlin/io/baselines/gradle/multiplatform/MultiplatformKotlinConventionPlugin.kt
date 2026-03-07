@@ -1,6 +1,5 @@
 package io.baselines.gradle.multiplatform
 
-import io.baselines.gradle.Versions
 import io.baselines.gradle.ext.alias
 import io.baselines.gradle.ext.libs
 import io.baselines.gradle.ext.plugins
@@ -20,7 +19,10 @@ class MultiplatformKotlinConventionPlugin : Plugin<Project> {
     }
 
     private fun Project.configureMultiplatform() {
-        kotlin { jvmToolchain(Versions.JAVA_VERSION) }
+        kotlin {
+            val javaVersion = libs.versions.java.get()
+            jvmToolchain(javaVersion.toInt())
+        }
         multiplatform {
             // Supported platforms
             iosArm64()

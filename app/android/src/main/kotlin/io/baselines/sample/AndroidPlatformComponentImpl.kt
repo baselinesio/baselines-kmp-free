@@ -14,7 +14,7 @@ import io.baselines.toolkit.config.AppConfig
  * @see [App] for initialization and usage context
  */
 class AndroidPlatformComponentImpl(
-    application: Application
+    application: Application,
 ) : AndroidPlatformComponent {
 
     private val packageInfo = application.packageManager.getPackageInfo(application.packageName, 0)

@@ -37,7 +37,10 @@ fun Project.androidLibrary(
         enableCoreLibraryDesugaring = true
         androidResources.enable = true
 
-        compilerOptions { jvmTarget.set(JvmTarget.fromTarget(Versions.JAVA_VERSION.toString())) }
+        compilerOptions {
+            val javaVersion = libs.versions.java.get()
+            jvmTarget.set(JvmTarget.fromTarget(javaVersion))
+        }
 
         block()
     }

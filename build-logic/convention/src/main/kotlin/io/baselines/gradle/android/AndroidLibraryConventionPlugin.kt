@@ -12,6 +12,8 @@ import org.gradle.api.Project
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
 
@@ -30,7 +32,17 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 version = release(Versions.COMPILE_SDK)
             }
             compileOptions { isCoreLibraryDesugaringEnabled = true }
-            java { toolchain { languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION)) } }
+            val javaVersion = libs.versions.java.get()
+            java {
+                toolchain {
+                    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+                }
+            }
+            kotlin {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.fromTarget(javaVersion))
+                }
+            }
 
             defaultConfig {
                 minSdk = Versions.MIN_SDK
@@ -56,6 +68,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
     private fun Project.android(block: LibraryExtension.() -> Unit) {
         extensions.configure<LibraryExtension>(block)
+    }
+
+    private fun Project.kotlin(block: KotlinAndroidProjectExtension.() -> Unit) {
+        extensions.configure<KotlinAndroidProjectExtension>(block)
     }
 }
 

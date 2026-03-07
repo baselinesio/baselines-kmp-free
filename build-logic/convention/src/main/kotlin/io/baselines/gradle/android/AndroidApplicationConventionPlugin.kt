@@ -28,8 +28,17 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         android {
             compileSdk { version = release(Versions.COMPILE_SDK) }
             compileOptions { isCoreLibraryDesugaringEnabled = true }
-            java { toolchain { languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION)) } }
-            kotlin { compilerOptions { jvmTarget.set(JvmTarget.fromTarget(Versions.JAVA_VERSION.toString())) } }
+            val javaVersion = libs.versions.java.get()
+            java {
+                toolchain {
+                    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+                }
+            }
+            kotlin {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.fromTarget(javaVersion))
+                }
+            }
 
             defaultConfig {
                 minSdk = Versions.MIN_SDK
