@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -15,27 +14,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import io.baselines.sample.ui.designsystem.components.scrollbar.LazyColumnScrollbar
 import io.baselines.sample.ui.designsystem.loading.LoadingStateUm
 import io.baselines.sample.ui.designsystem.theme.AppTheme
+import io.baselines.ui.playground.Res
 import io.baselines.ui.playground.components.CollapsingSection
+import io.baselines.ui.playground.icon_erase_mono_24
 import io.baselines.ui.playground.sections.PlaygroundSection
 import io.baselines.ui.playground.sections.SpacingsSection
 import io.baselines.ui.playground.sections.TypographySection
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun PlaygroundScreen(
@@ -96,19 +98,18 @@ fun PlaygroundScreen(
                             )
                         },
                         trailingIcon = {
-                            TextButton(
+                            IconButton(
                                 modifier = Modifier.padding(
                                     horizontal = AppTheme.spacings.elementMedium
                                 ),
-                                colors = ButtonDefaults.textButtonColors(
+                                colors = IconButtonDefaults.iconButtonColors(
                                     containerColor = AppTheme.colorScheme.surfaceContainer,
                                 ),
                                 onClick = { onSearchInputChanged("") },
-                                contentPadding = PaddingValues()
                             ) {
-                                Text(
-                                    text = "\uD83D\uDDD1\uFE0F",
-                                    textAlign = TextAlign.Center,
+                                Icon(
+                                    imageVector = vectorResource(Res.drawable.icon_erase_mono_24),
+                                    contentDescription = null,
                                 )
                             }
                         },

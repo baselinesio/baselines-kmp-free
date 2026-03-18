@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +16,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.TextStyle
 import io.baselines.sample.ui.designsystem.theme.AppTheme
+import io.baselines.ui.playground.Res
+import io.baselines.ui.playground.icon_sectionarrow_mono_24
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun CollapsingSection(
@@ -47,11 +51,12 @@ fun CollapsingSection(
                 style = titleStyle,
                 color = AppTheme.colorScheme.onSurface
             )
-            val rotation = if (expanded) 180F else 0F
-            Text(
+            val rotation = if (expanded) -90F else 0F
+            Icon(
                 modifier = Modifier
                     .rotate(rotation),
-                text = "⬇\uFE0F",
+                imageVector = vectorResource(Res.drawable.icon_sectionarrow_mono_24),
+                contentDescription = null,
             )
         }
         val contentPaddings = PaddingValues(

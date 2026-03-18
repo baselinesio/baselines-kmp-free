@@ -26,4 +26,5 @@ kotlin {
 compose.resources {
     publicResClass = true
     packageOfResClass = "io.baselines.sample.ui.designsystem"
+    generateResClass = always
 }
