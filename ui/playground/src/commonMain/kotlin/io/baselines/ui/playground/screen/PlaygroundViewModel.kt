@@ -15,6 +15,7 @@ import io.baselines.sample.ui.designsystem.loading.LoadingController
 import io.baselines.toolkit.config.AppConfigManager
 import io.baselines.ui.playground.sections.PlaygroundSection
 import io.baselines.ui.viewmodel.Mvvm
+import io.baselines.ui.viewmodel.createEventSink
 import io.baselines.ui.viewmodel.launch
 import io.baselines.ui.viewmodel.mutableState
 import kotlinx.collections.immutable.toImmutableList
@@ -25,6 +26,7 @@ class PlaygroundViewModel(
     @Assisted private val sections: Set<PlaygroundSection>,
 ) : ViewModel(), Mvvm<PlaygroundUiEvent, PlaygroundUiState> {
 
+    private val eventSink = createEventSink(::handleEvent)
     private val searchInputFlow = mutableState("")
     private val sectionFactoriesFlow = mutableState(sections.toImmutableList())
     private val loadingController = LoadingController.create()
@@ -40,10 +42,13 @@ class PlaygroundViewModel(
             loading = loading,
             sections = sectionFactories,
             searchInput = searchInput,
-        ) { event ->
-            when (event) {
-                is PlaygroundUiEvent.Search -> handleSearch(event.input)
-            }
+            eventSink = eventSink,
+        )
+    }
+
+    private fun handleEvent(event: PlaygroundUiEvent) {
+        when (event) {
+            is PlaygroundUiEvent.Search -> handleSearch(event.input)
         }
     }
 

@@ -15,10 +15,22 @@ package io.baselines.ui.viewmodel
  *
  * ```kotlin
  * sealed interface ProfileUiEvent : UiEvent {
- *     data object DoLogout : ProfileUiEvent
+ *     data object DoLogout : ProfileUiEvent {
+ *         override val dispatchPolicy = UiEventDispatchPolicy.Debounce()
+ *     }
  * }
  * ```
  *
  * This event can then be observed and handled inside the ViewModel to perform the logout logic.
  */
-interface UiEvent
+interface UiEvent {
+
+    /**
+     * Controls how this event should be forwarded through the shared UI event pipeline.
+     *
+     * Events are immediate by default. Opt in to [UiEventDispatchPolicy.Debounce] for click-like actions
+     * that should ignore repeated taps within a short time window.
+     */
+    val dispatchPolicy: UiEventDispatchPolicy
+        get() = UiEventDispatchPolicy.Immediate
+}

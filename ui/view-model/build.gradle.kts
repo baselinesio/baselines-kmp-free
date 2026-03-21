@@ -7,7 +7,13 @@ plugins {
     alias(libs.plugins.baselines.di)
 }
 
-androidLibrary("io.baselines.ui.viewmodel")
+androidLibrary("io.baselines.ui.viewmodel") {
+    withHostTest {
+        isIncludeAndroidResources = true
+        isReturnDefaultValues = true
+        enableCoverage = true
+    }
+}
 
 kotlin {
     sourceSets {
@@ -16,6 +22,10 @@ kotlin {
             api(libs.metro.viewmodel)
             api(libs.androidx.compose.viewModel)
             api(libs.androidx.compose.lifecycle)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.coroutines.test)
         }
     }
 }

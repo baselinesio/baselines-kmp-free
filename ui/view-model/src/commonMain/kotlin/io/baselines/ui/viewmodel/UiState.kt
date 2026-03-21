@@ -15,6 +15,8 @@ import androidx.compose.runtime.Stable
  * A "Profile" screen that displays a profile image and username might use the following state:
  *
  * ```kotlin
+ * private val eventSink = createEventSink<ProfileUiEvent>(::handleEvent)
+ *
  * @Immutable
  * data class ProfileUiState(
  *     val profileImageUrl: String,
@@ -38,6 +40,8 @@ interface UiState<E : UiEvent> {
      * On a "Profile" screen, when the user taps the "Logout" button, the event should be sent like this:
      *
      * ```kotlin
+     * private val eventSink = createEventSink<ProfileUiEvent>(::handleEvent)
+     *
      * ProfileScreen(
      *     onLogoutClick = { eventSink(ProfileUiEvent.DoLogout) }
      * )

@@ -40,9 +40,7 @@ class MainViewModel(
         return MainUiState(
             navState = navState,
             snackbarHostState = snackbarHostState,
-        ) {
-            /* no-op */
-        }
+        ) { /* no-op */ }
     }
 
     @Composable
