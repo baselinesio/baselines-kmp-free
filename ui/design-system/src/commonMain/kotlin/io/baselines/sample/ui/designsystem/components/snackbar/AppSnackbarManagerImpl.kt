@@ -7,13 +7,11 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 import io.baselines.sample.ui.designsystem.components.snackbar.AppSnackbarManager.AppSnackbar
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-@Inject
 @ContributesBinding(AppScope::class)
 @SingleIn(AppScope::class)
 class AppSnackbarManagerImpl : AppSnackbarManager {

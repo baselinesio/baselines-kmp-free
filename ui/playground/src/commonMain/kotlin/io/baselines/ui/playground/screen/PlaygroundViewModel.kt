@@ -64,7 +64,7 @@ class PlaygroundViewModel(
 
     @AssistedFactory
     @ContributesIntoMap(AppScope::class)
-    @ManualViewModelAssistedFactoryKey(Factory::class)
+    @ManualViewModelAssistedFactoryKey
     fun interface Factory : ManualViewModelAssistedFactory {
         fun create(
             sections: Set<PlaygroundSection>,

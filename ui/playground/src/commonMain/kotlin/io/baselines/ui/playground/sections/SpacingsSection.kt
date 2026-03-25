@@ -15,11 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.toolkit.di.UiScope
 
-@Inject
 @ContributesIntoSet(UiScope::class)
 class SpacingsSection : PlaygroundSection {
 

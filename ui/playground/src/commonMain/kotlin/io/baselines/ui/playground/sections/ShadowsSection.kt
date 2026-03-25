@@ -12,11 +12,9 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.text.style.TextAlign
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.toolkit.di.UiScope
 
-@Inject
 @ContributesIntoSet(UiScope::class)
 class ShadowsSection : PlaygroundSection {
 

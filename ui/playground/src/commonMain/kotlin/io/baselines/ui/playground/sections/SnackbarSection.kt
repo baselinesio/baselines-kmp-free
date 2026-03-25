@@ -6,7 +6,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import io.baselines.sample.ui.designsystem.components.button.AppButton
 import io.baselines.sample.ui.designsystem.components.snackbar.AppSnackbarManager
 import io.baselines.sample.ui.designsystem.components.snackbar.showFailure
@@ -14,7 +13,6 @@ import io.baselines.sample.ui.designsystem.components.snackbar.showSuccess
 import io.baselines.sample.ui.designsystem.theme.AppTheme
 import io.baselines.toolkit.di.UiScope
 
-@Inject
 @ContributesIntoSet(UiScope::class)
 class SnackbarSection(
     private val snackbarManager: AppSnackbarManager,
