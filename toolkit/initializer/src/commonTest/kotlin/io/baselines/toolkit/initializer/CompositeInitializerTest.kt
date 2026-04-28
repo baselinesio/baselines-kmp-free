@@ -2,13 +2,13 @@
 
 package io.baselines.toolkit.initializer
 
-import dev.zacsweers.metro.Provider
 import io.baselines.toolkit.coroutines.AppDispatchers
 import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -21,8 +21,8 @@ import kotlinx.coroutines.test.runTest
 
 class CompositeInitializerTest {
 
-    private val asyncInitializers = mutableMapOf<Int, Provider<AsyncInitializer>>()
-    private val coreInitializers = mutableMapOf<Int, Provider<Initializer>>()
+    private val asyncInitializers = mutableMapOf<Int, () -> AsyncInitializer>()
+    private val coreInitializers = mutableMapOf<Int, () -> Initializer>()
 
     @AfterTest
     fun tearDown() {
@@ -144,11 +144,11 @@ class CompositeInitializerTest {
     private fun <T> createMockAsyncInitializer(
         result: Result<T>,
         initCallback: () -> Unit = {},
-    ): Provider<AsyncInitializer> {
-        return Provider {
+    ): () -> AsyncInitializer {
+        return {
             object : AsyncInitializer {
                 override suspend fun init() {
-                    delay(Random.nextLong(from = 0, until = 30))
+                    delay(Random.nextLong(from = 0, until = 30).milliseconds)
                     initCallback.invoke()
                     result.onFailure {
                         throw it
@@ -161,11 +161,11 @@ class CompositeInitializerTest {
     private fun <T> createMockCoreInitializer(
         result: Result<T>,
         initCallback: () -> Unit = {},
-    ): Provider<Initializer> {
-        return Provider {
+    ): () -> Initializer {
+        return {
             object : Initializer {
                 override suspend fun init() {
-                    delay(Random.nextLong(from = 0, until = 30))
+                    delay(Random.nextLong(from = 0, until = 30).milliseconds)
                     initCallback.invoke()
                     result.onFailure {
                         throw it

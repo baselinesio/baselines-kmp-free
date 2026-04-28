@@ -21,18 +21,18 @@ class KermitWriter(
 
     override fun i(
         message: () -> String
-    ) = co.touchlab.kermit.Logger.i(createTag(), message = message)
+    ) = co.touchlab.kermit.Logger.i(tag = createTag(), message = message)
 
     override fun d(
         message: () -> String
-    ) = co.touchlab.kermit.Logger.d(createTag(), message = message)
+    ) = co.touchlab.kermit.Logger.d(tag = createTag(), message = message)
 
     override fun e(
         throwable: Throwable?,
         message: () -> String
     ) {
         co.touchlab.kermit.Logger.e(
-            createTag(),
+            tag = createTag(),
             message = message,
             throwable = if (printStacktrace) throwable else null
         )

@@ -2,7 +2,6 @@ package io.baselines.toolkit.initializer
 
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.Provider
 import dev.zacsweers.metro.SingleIn
 import io.baselines.toolkit.coroutines.AppDispatchers
 import io.baselines.toolkit.logger.Logger
@@ -36,8 +35,8 @@ import kotlinx.coroutines.withContext
 @Inject
 @SingleIn(AppScope::class)
 class CompositeInitializer(
-    private val asyncInitializerProviders: Map<Int, Provider<AsyncInitializer>>,
-    private val coreInitializerProviders: Map<Int, Provider<Initializer>>,
+    private val asyncInitializerProviders: Map<Int, () -> AsyncInitializer>,
+    private val coreInitializerProviders: Map<Int, () -> Initializer>,
     private val appDispatchers: AppDispatchers,
 ) {
     private val resultStateFlow = MutableSharedFlow<Result<Unit>>(
@@ -75,7 +74,7 @@ class CompositeInitializer(
                     val asyncInitializers = asyncInitializerProviders.entries
                         .sortedBy { it.key }
                         .map { it.value }
-                    val asyncInitResult = executeInit(asyncInitializers as List<Provider<Initializer>>)
+                    val asyncInitResult = executeInit(asyncInitializers as List<() -> Initializer>)
                     resultStateFlow.emit(asyncInitResult)
                 }
             } else {
@@ -84,7 +83,7 @@ class CompositeInitializer(
         }
     }
 
-    private suspend fun executeInit(initializerProviders: List<Provider<Initializer>>): Result<Unit> {
+    private suspend fun executeInit(initializerProviders: List<() -> Initializer>): Result<Unit> {
         val results = mutableListOf<Result<Unit>>()
         for (initializerProvider in initializerProviders) {
             val initializer = initializerProvider()
