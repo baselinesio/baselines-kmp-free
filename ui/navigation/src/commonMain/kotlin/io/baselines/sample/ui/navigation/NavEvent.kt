@@ -1,10 +1,7 @@
-@file:OptIn(ExperimentalUuidApi::class)
-
 package io.baselines.sample.ui.navigation
 
 import androidx.compose.runtime.Immutable
 import io.baselines.sample.domain.api.NavRoute
-import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 /**

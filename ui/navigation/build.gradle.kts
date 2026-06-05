@@ -7,7 +7,13 @@ plugins {
     alias(libs.plugins.baselines.di)
 }
 
-androidLibrary("io.baselines.sample.ui.navigation")
+androidLibrary("io.baselines.sample.ui.navigation") {
+    withHostTest {
+        isIncludeAndroidResources = true
+        isReturnDefaultValues = true
+        enableCoverage = true
+    }
+}
 
 kotlin {
     sourceSets {
@@ -17,6 +23,10 @@ kotlin {
             implementation(libs.metro.viewmodel)
             api(libs.androidx.compose.lifecycle)
             api(libs.androidx.compose.navigation)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.coroutines.test)
         }
     }
 }

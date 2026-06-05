@@ -2,28 +2,27 @@
 java = "21"
 android-gradlePlugin = "9.2.1"
 android-desugarjdklibs = "2.1.5"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 kotlin-serialization = "1.11.0"
 kotlin-coroutines = "1.11.0"
 kotlin-time = "0.8.0"
 kotlin-immutableCollections = "0.4.0"
-kotlin-test = "2.3.0"
 kotlin-compose-material3 = "1.11.0-alpha07"
-kotlin-compose = "1.11.0-rc01"
-androidx-compose = "1.11.1"
+kotlin-compose = "1.11.1"
+androidx-compose = "1.11.2"
 androidx-compose-activity = "1.13.0"
 androidx-compose-lifecycle = "2.10.0"
 androidx-compose-navigation = "2.9.2"
 androidx-splash = "1.2.0"
 logging-kermit = "2.1.0"
-metro = "1.0.0"
+metro = "1.1.1"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
 kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-time" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-test" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-immutableCollections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutableCollections" }
 kotlin-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "kotlin-compose-material3" }
 kotlin-compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "kotlin-compose" }

@@ -16,10 +16,10 @@ import io.baselines.toolkit.initializer.Initializer
 interface InitializersProvider {
 
     @Multibinds(allowEmpty = true)
-    val coreInitializers: Map<Int, Initializer>
+    val coreInitializers: Map<Int, () -> Initializer>
 
     @Multibinds(allowEmpty = true)
-    val asyncInitializers: Map<Int, AsyncInitializer>
+    val asyncInitializers: Map<Int, () -> AsyncInitializer>
 
     @Binds
     @IntoMap

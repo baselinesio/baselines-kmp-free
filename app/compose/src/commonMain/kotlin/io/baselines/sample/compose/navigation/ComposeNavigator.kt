@@ -1,10 +1,5 @@
 package io.baselines.sample.compose.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.navOptions
 import dev.zacsweers.metro.Inject
@@ -13,38 +8,29 @@ import io.baselines.sample.ui.navigation.NavEvent
 import io.baselines.sample.ui.navigation.Navigator
 import io.baselines.toolkit.di.UiScope
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Inject
 @SingleIn(UiScope::class)
 class ComposeNavigator(
     private val navigator: Navigator,
 ) {
 
-    @Composable
-    fun bind(navController: NavHostController): NavEvent {
-        val event by navigator.events.collectAsStateWithLifecycle(NavEvent.Undefined())
-        LaunchNavigationHandler(navController, event)
-        return event
-    }
-
-    @Composable
-    private fun LaunchNavigationHandler(controller: NavHostController, event: NavEvent) {
-        LaunchedEffect(event) {
+    suspend fun bind(navController: NavHostController) {
+        navigator.events.collect { event ->
             when (event) {
-                is NavEvent.Navigate -> controller.navigate(
+                is NavEvent.Navigate -> navController.navigate(
                     route = event.route,
                     navOptions = event.optionsBuilder?.let { optionsBuilder ->
                         navOptions {
-                            with(optionsBuilder) { configure(controller.graph) }
+                            with(optionsBuilder) { configure(navController.graph) }
                         }
                     }
                 )
 
-                is NavEvent.Up -> controller.navigateUp()
+                is NavEvent.Up -> navController.navigateUp()
 
                 is NavEvent.Back -> event.route
-                    ?.let { controller.popBackStack(it, event.inclusive) }
-                    ?: controller.popBackStack()
+                    ?.let { navController.popBackStack(it, event.inclusive) }
+                    ?: navController.popBackStack()
 
                 is NavEvent.Undefined -> {
                     /* no-op */

@@ -2,6 +2,7 @@ package io.baselines.sample.compose.ui
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
@@ -34,7 +35,10 @@ class MainViewModel(
     override fun state(): MainUiState {
         val appInitResult by compositeInitializer.resultFlow.collectAsStateWithLifecycle(null)
         val navState = rememberNavState(appInitResult)
-        navState?.let { composeNavigator.bind(it.controller) }
+        val navController = navState?.controller
+        LaunchedEffect(navController) {
+            navController?.let { composeNavigator.bind(it) }
+        }
         val snackbarHostState = remember { SnackbarHostState() }
         snackbarManager.bind(snackbarHostState)
         return MainUiState(

@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalUuidApi::class)
-
 package io.baselines.sample.ui.designsystem.components.snackbar
 
 import androidx.compose.material3.SnackbarDuration
@@ -7,7 +5,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 interface AppSnackbarManager {
