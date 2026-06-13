@@ -2,6 +2,8 @@
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+rootProject.name = "BaselinesSample"
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {

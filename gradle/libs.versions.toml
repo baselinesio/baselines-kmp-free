@@ -6,7 +6,7 @@ kotlin = "2.4.0"
 kotlin-serialization = "1.11.0"
 kotlin-coroutines = "1.11.0"
 kotlin-time = "0.8.0"
-kotlin-immutableCollections = "0.4.0"
+kotlin-immutableCollections = "0.5.0"
 kotlin-compose-material3 = "1.11.0-alpha07"
 kotlin-compose = "1.11.1"
 androidx-compose = "1.11.2"
@@ -15,7 +15,7 @@ androidx-compose-lifecycle = "2.10.0"
 androidx-compose-navigation = "2.9.2"
 androidx-splash = "1.2.0"
 logging-kermit = "2.1.0"
-metro = "1.1.1"
+metro = "1.2.0"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
